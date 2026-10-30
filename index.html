@@ -7,14 +7,14 @@
   
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#059669">
+  <meta name="theme-color" content="#10b981">
   
-  <!-- Neues Medikamenten-Icon (Pille) -->
-  <link rel="icon" type="image/png" href="https://img.icons8.com/color/512/pill.png">
-  <link rel="apple-touch-icon" href="https://img.icons8.com/color/512/pill.png">
+  <!-- Modernes farbiges Medikamenten-Icon mit Text -->
+  <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/512/pill.png">
+  <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/512/pill.png">
 
-  <!-- Manifest mit neuem Icon -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Tirosint App","short_name":"Tirosint","start_url":".","display":"standalone","background_color":"#f8fafc","theme_color":"#059669","icons":[{"src":"https://img.icons8.com/color/512/pill.png","sizes":"512x512","type":"image/png"}]}'>
+  <!-- Manifest -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Medi’s App","short_name":"Medi’s","start_url":".","display":"standalone","background_color":"#f8fafc","theme_color":"#10b981","icons":[{"src":"https://img.icons8.com/fluency/512/pill.png","sizes":"512x512","type":"image/png"}]}'>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,7 +29,7 @@
 </head>
 <body class="min-h-screen flex justify-center items-start sm:py-6">
 
-  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl flex flex-col justify-between overflow-hidden relative">
+  <div class="w-full max-w-md bg-slate-50 min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl flex flex-col justify-between overflow-hidden relative">
     
     <!-- Main Content -->
     <div class="p-5 space-y-5 pb-20">
@@ -37,95 +37,97 @@
       <!-- Header -->
       <div class="flex items-center justify-between pt-1">
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-md shadow-emerald-200">
-            <i data-lucide="pill" class="w-6 h-6"></i>
+          <!-- Logo Icon mit Beschriftung "Medi's" -->
+          <div class="flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500 to-teal-700 text-white p-2.5 rounded-2xl shadow-lg shadow-emerald-200 min-w-[56px]">
+            <i data-lucide="pill" class="w-7 h-7"></i>
+            <span class="text-[10px] font-black uppercase tracking-wider mt-0.5 text-emerald-100">Medi’s</span>
           </div>
           <div>
-            <h1 class="font-bold text-slate-800 text-lg leading-tight">Tirosint &amp; Supplements</h1>
-            <p id="current-date-str" class="text-xs font-semibold text-slate-500">Freitag, 30. Oktober 2026</p>
+            <h1 class="font-extrabold text-slate-800 text-xl leading-tight">Tirosint &amp; Supplements</h1>
+            <p id="current-date-str" class="text-xs font-bold text-emerald-600">Freitag, 30. Oktober 2026</p>
           </div>
         </div>
-        <button onclick="openModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 active:scale-95 transition-all flex items-center gap-1">
+        <button onclick="openModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm">
           <i data-lucide="plus" class="w-4 h-4"></i> Ändern
         </button>
       </div>
 
       <!-- Card 1: Kur status -->
-      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3">
+      <div class="bg-white border-2 border-emerald-100 rounded-3xl p-4 space-y-3 shadow-sm">
         <div class="flex justify-between items-start">
-          <div class="flex items-center gap-2.5">
-            <div class="text-emerald-700 bg-emerald-100 p-2 rounded-xl">
+          <div class="flex items-center gap-3">
+            <div class="text-white bg-gradient-to-r from-emerald-500 to-teal-600 p-2.5 rounded-2xl shadow-md shadow-emerald-100">
               <i data-lucide="calendar" class="w-5 h-5"></i>
             </div>
             <div>
-              <h2 class="font-bold text-slate-800 text-sm">14-Tage Tirosint Wechselkur</h2>
-              <p class="text-xs text-slate-500">150 µg ↔ 137,5 µg im Wechsel</p>
+              <h2 class="font-extrabold text-slate-800 text-base">14-Tage Wechselkur</h2>
+              <p class="text-xs font-semibold text-slate-500">150 µg ↔ 137,5 µg im Wechsel</p>
             </div>
           </div>
-          <span id="kur-badge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">
+          <span id="kur-badge" class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full border border-emerald-200">
             Startet morgen
           </span>
         </div>
 
-        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-          <div class="bg-emerald-600 h-full w-[0%]" id="kur-progress-bar"></div>
+        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+          <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500 w-[0%]" id="kur-progress-bar"></div>
         </div>
 
-        <div class="flex justify-between items-center text-xs text-slate-600 font-medium pt-0.5">
+        <div class="flex justify-between items-center text-xs text-slate-600 font-bold pt-0.5">
           <span id="kur-info-text">Start: 31.10.2026</span>
-          <span class="font-extrabold text-emerald-700 text-sm" id="today-dose-info">Morgen: 150 µg</span>
+          <span class="font-black text-emerald-600 text-base" id="today-dose-info">Morgen: 150 µg</span>
         </div>
       </div>
 
       <!-- Timer Card -->
-      <div id="timer-card" class="hidden bg-amber-50 border border-amber-300 rounded-2xl p-4 space-y-2">
+      <div id="timer-card" class="hidden bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-3xl p-4 space-y-2 shadow-sm">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+          <div class="flex items-center gap-2 text-amber-900 font-extrabold text-sm">
             <i data-lucide="timer" class="w-5 h-5 text-amber-600 animate-spin"></i>
             <span>30 Min. Essenspause läuft</span>
           </div>
-          <span id="timer-display" class="font-mono font-extrabold text-amber-950 text-base">30:00</span>
+          <span id="timer-display" class="font-mono font-black text-amber-950 text-lg bg-amber-200 px-2.5 py-0.5 rounded-xl">30:00</span>
         </div>
-        <p class="text-xs font-medium text-amber-800">Bitte noch nichts essen. Tirosint benötigt nüchternen Magen.</p>
+        <p class="text-xs font-bold text-amber-800">Bitte noch nichts essen. Tirosint benötigt nüchternen Magen.</p>
       </div>
 
       <!-- Morgens Section -->
       <div class="space-y-3">
-        <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
+        <div class="flex items-center gap-2 text-slate-800 font-black text-sm uppercase tracking-wider px-1">
           <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i>
           <span>Morgens (07:30 Uhr)</span>
         </div>
 
         <!-- Tirosint Item -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-3.5 flex items-center justify-between shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
-              <h3 class="font-extrabold text-slate-800 text-base">Tirosint</h3>
-              <span class="bg-sky-100 text-sky-800 text-xs px-2 py-0.5 rounded-md font-bold">Weichkapsel</span>
+              <h3 class="font-black text-slate-800 text-lg">Tirosint</h3>
+              <span class="bg-sky-100 text-sky-800 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-sky-200">Weichkapsel</span>
             </div>
-            <p class="text-xs text-slate-500">Nüchtern mit Wasser (danach 30 Min. warten)</p>
+            <p class="text-xs font-medium text-slate-500">Nüchtern mit Wasser (danach 30 Min. warten)</p>
           </div>
           <div class="text-right flex items-center gap-3">
-            <div class="text-emerald-700 font-black text-lg leading-none" id="tirosint-dose-display">150 <span class="text-xs font-bold">µg</span></div>
-            <button id="tirosint-check-btn" onclick="toggleTirosint()" class="w-10 h-10 rounded-xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95">
-              <i data-lucide="check" class="w-6 h-6"></i>
+            <div class="text-emerald-600 font-black text-xl leading-none" id="tirosint-dose-display">150 <span class="text-xs font-bold">µg</span></div>
+            <button id="tirosint-check-btn" onclick="toggleTirosint()" class="w-11 h-11 rounded-2xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95 shadow-sm">
+              <i data-lucide="check" class="w-7 h-7"></i>
             </button>
           </div>
         </div>
 
         <!-- Vitamin D3 Item -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-3.5 flex items-center justify-between shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
-              <h3 class="font-extrabold text-slate-800 text-base">Vitamin D3</h3>
-              <span class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-md font-bold">Alle 2 Tage</span>
+              <h3 class="font-black text-slate-800 text-lg">Vitamin D3</h3>
+              <span class="bg-amber-100 text-amber-800 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-amber-200">Alle 2 Tage</span>
             </div>
-            <p class="text-xs text-slate-500">5 Tropfen einnehmen</p>
+            <p class="text-xs font-medium text-slate-500">5 Tropfen einnehmen</p>
           </div>
           <div class="text-right flex items-center gap-3">
-            <div class="text-slate-700 font-extrabold text-sm">5 Tropfen</div>
-            <button id="vitd-check-btn" onclick="toggleVitD()" class="w-10 h-10 rounded-xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95">
-              <i data-lucide="check" class="w-6 h-6"></i>
+            <div class="text-slate-700 font-black text-base">5 Tropfen</div>
+            <button id="vitd-check-btn" onclick="toggleVitD()" class="w-11 h-11 rounded-2xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95 shadow-sm">
+              <i data-lucide="check" class="w-7 h-7"></i>
             </button>
           </div>
         </div>
@@ -133,24 +135,24 @@
 
       <!-- Abends Section -->
       <div class="space-y-3 pt-1">
-        <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
+        <div class="flex items-center gap-2 text-slate-800 font-black text-sm uppercase tracking-wider px-1">
           <i data-lucide="moon" class="w-4 h-4 text-indigo-500"></i>
           <span>Abends (21:00 Uhr)</span>
         </div>
 
         <!-- Magnesium Item -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-3.5 flex items-center justify-between shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-3xl p-4 flex items-center justify-between shadow-sm">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
-              <h3 class="font-extrabold text-slate-800 text-base">Magnesium</h3>
-              <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-md font-bold">Täglich</span>
+              <h3 class="font-black text-slate-800 text-lg">Magnesium</h3>
+              <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-indigo-200">Täglich</span>
             </div>
-            <p class="text-xs text-slate-500">1 Dosis vor dem Schlafen</p>
+            <p class="text-xs font-medium text-slate-500">1 Dosis vor dem Schlafen</p>
           </div>
           <div class="text-right flex items-center gap-3">
-            <div class="text-slate-700 font-extrabold text-sm">1x Abends</div>
-            <button id="mag-check-btn" onclick="toggleMagnesium()" class="w-10 h-10 rounded-xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95">
-              <i data-lucide="check" class="w-6 h-6"></i>
+            <div class="text-slate-700 font-black text-base">1x Abends</div>
+            <button id="mag-check-btn" onclick="toggleMagnesium()" class="w-11 h-11 rounded-2xl border-2 border-slate-300 flex items-center justify-center text-slate-300 transition-all active:scale-95 shadow-sm">
+              <i data-lucide="check" class="w-7 h-7"></i>
             </button>
           </div>
         </div>
@@ -162,32 +164,32 @@
     </div>
 
     <!-- Bottom Notification -->
-    <div class="p-3 bg-slate-50 border-t border-slate-200 text-center absolute bottom-0 w-full bg-white">
-      <p class="text-xs font-medium text-slate-500">Erinnerungen aktiv für Morgens &amp; Abends</p>
+    <div class="p-3 bg-white border-t border-slate-200 text-center absolute bottom-0 w-full">
+      <p class="text-xs font-bold text-slate-500">Erinnerungen aktiv für Morgens &amp; Abends</p>
     </div>
 
     <!-- Modal -->
     <div id="edit-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-3xl p-5 w-full max-w-xs space-y-4 shadow-2xl">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-slate-800 text-base">Eintrag hinzufügen</h3>
+          <h3 class="font-extrabold text-slate-800 text-lg">Eintrag hinzufügen</h3>
           <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
         
         <div class="space-y-3 text-xs">
           <div>
             <label class="font-bold text-slate-700 text-xs">Name des Präparats</label>
-            <input type="text" id="new-name" placeholder="z.B. Zink" class="w-full mt-1 p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-500 text-sm">
+            <input type="text" id="new-name" placeholder="z.B. Zink" class="w-full mt-1 p-3 border border-slate-300 rounded-xl focus:outline-emerald-500 text-sm font-semibold">
           </div>
           <div>
             <label class="font-bold text-slate-700 text-xs">Dosierung / Einnahmehinweis</label>
-            <input type="text" id="new-dose" placeholder="z.B. 1 Tablette" class="w-full mt-1 p-2.5 border border-slate-300 rounded-xl focus:outline-emerald-500 text-sm">
+            <input type="text" id="new-dose" placeholder="z.B. 1 Tablette" class="w-full mt-1 p-3 border border-slate-300 rounded-xl focus:outline-emerald-500 text-sm font-semibold">
           </div>
         </div>
 
         <div class="flex gap-2 pt-1">
-          <button onclick="closeModal()" class="w-1/2 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-700 text-xs">Abbrechen</button>
-          <button onclick="addCustomItem()" class="w-1/2 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700">Speichern</button>
+          <button onclick="closeModal()" class="w-1/2 py-3 rounded-xl border border-slate-300 font-bold text-slate-700 text-xs">Abbrechen</button>
+          <button onclick="addCustomItem()" class="w-1/2 py-3 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 shadow-md shadow-emerald-200">Speichern</button>
         </div>
       </div>
     </div>
@@ -300,13 +302,13 @@
 
     function updateUI() {
       const tBtn = document.getElementById('tirosint-check-btn');
-      tBtn.className = state.tirosintTaken ? "w-10 h-10 rounded-xl bg-emerald-600 border-emerald-600 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95";
+      tBtn.className = state.tirosintTaken ? "w-11 h-11 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-200" : "w-11 h-11 rounded-2xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95 shadow-sm";
 
       const vBtn = document.getElementById('vitd-check-btn');
-      vBtn.className = state.vitdTaken ? "w-10 h-10 rounded-xl bg-emerald-600 border-emerald-600 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95";
+      vBtn.className = state.vitdTaken ? "w-11 h-11 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-200" : "w-11 h-11 rounded-2xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95 shadow-sm";
 
       const mBtn = document.getElementById('mag-check-btn');
-      mBtn.className = state.magTaken ? "w-10 h-10 rounded-xl bg-emerald-600 border-emerald-600 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95";
+      mBtn.className = state.magTaken ? "w-11 h-11 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-200" : "w-11 h-11 rounded-2xl border-2 border-slate-300 text-slate-300 flex items-center justify-center transition-all active:scale-95 shadow-sm";
 
       if (state.timerEndTime && state.timerEndTime > Date.now()) {
         startTimer();
@@ -324,46 +326,4 @@
       if (!name) return;
 
       state.customItems.push({ id: Date.now(), name, dose, taken: false });
-      localStorage.setItem('custom_items', JSON.stringify(state.customItems));
-      
-      document.getElementById('new-name').value = '';
-      document.getElementById('new-dose').value = '';
-      closeModal();
-      renderCustomItems();
-    }
-
-    function toggleCustomItem(id) {
-      state.customItems = state.customItems.map(item => {
-        if (item.id === id) item.taken = !item.taken;
-        return item;
-      });
-      localStorage.setItem('custom_items', JSON.stringify(state.customItems));
-      renderCustomItems();
-    }
-
-    function renderCustomItems() {
-      const container = document.getElementById('custom-items-list');
-      container.innerHTML = '';
-      
-      state.customItems.forEach(item => {
-        const div = document.createElement('div');
-        div.className = "bg-white border border-slate-200 rounded-2xl p-3.5 flex items-center justify-between shadow-sm";
-        div.innerHTML = `
-          <div class="space-y-1">
-            <h3 class="font-extrabold text-slate-800 text-base">${item.name}</h3>
-            <p class="text-xs text-slate-500">${item.dose}</p>
-          </div>
-          <button onclick="toggleCustomItem(${item.id})" class="w-10 h-10 rounded-xl ${item.taken ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-2 border-slate-300 text-slate-300'} flex items-center justify-center transition-all active:scale-95">
-            <i data-lucide="check" class="w-6 h-6"></i>
-          </button>
-        `;
-        container.appendChild(div);
-      });
-      lucide.createIcons();
-    }
-
-    initKurStatus();
-    updateUI();
-  </script>
-</body>
-</html>
+      localStorage.setItem('custom_items', JSON.stringify(state.
