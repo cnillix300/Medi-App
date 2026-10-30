@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tirosint & Supplements</title>
+  <title>Medi’s App</title>
   
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0f172a">
   
-  <!-- Icon für Apple / Browser -->
   <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/512/pill.png">
   <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/512/pill.png">
 
-  <!-- Link zur neuen manifest.json Datei -->
   <link rel="manifest" href="manifest.json">
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -43,41 +41,17 @@
             <span class="text-[10px] font-black uppercase tracking-wider mt-0.5 text-emerald-100">Medi’s</span>
           </div>
           <div>
-            <h1 class="font-extrabold text-white text-xl leading-tight">Tirosint &amp; Supplements</h1>
+            <h1 class="font-extrabold text-white text-xl leading-tight">Medikamenten-Plan</h1>
             <p id="current-date-str" class="text-xs font-bold text-emerald-400">Freitag, 30. Oktober 2026</p>
           </div>
         </div>
         <button onclick="openModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-900/60 text-emerald-300 border border-emerald-700 hover:bg-emerald-800 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm">
-          <i data-lucide="plus" class="w-4 h-4"></i> Ändern
+          <i data-lucide="plus" class="w-4 h-4"></i> Hinzufügen
         </button>
       </div>
 
-      <!-- Card 1: Kur status -->
-      <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-4 space-y-3 shadow-sm">
-        <div class="flex justify-between items-start">
-          <div class="flex items-center gap-3">
-            <div class="text-white bg-gradient-to-r from-emerald-500 to-teal-600 p-2.5 rounded-2xl shadow-md">
-              <i data-lucide="calendar" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h2 class="font-extrabold text-white text-base">14-Tage Wechselkur</h2>
-              <p class="text-xs font-semibold text-slate-400">150 µg ↔ 137,5 µg im Wechsel</p>
-            </div>
-          </div>
-          <span id="kur-badge" class="bg-emerald-950 text-emerald-300 text-xs font-extrabold px-3 py-1 rounded-full border border-emerald-700">
-            Startet morgen
-          </span>
-        </div>
-
-        <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden p-0.5 border border-slate-600">
-          <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500 w-[0%]" id="kur-progress-bar"></div>
-        </div>
-
-        <div class="flex justify-between items-center text-xs text-slate-300 font-bold pt-0.5">
-          <span id="kur-info-text">Start: 31.10.2026</span>
-          <span class="font-black text-emerald-400 text-base" id="today-dose-info">Morgen: 150 µg</span>
-        </div>
-      </div>
+      <!-- Card 1: Kur status (Ein-/Ausbllendbar) -->
+      <div id="kur-card-container"></div>
 
       <!-- Timer Card -->
       <div id="timer-card" class="hidden bg-amber-950/60 border border-amber-700 rounded-3xl p-4 space-y-2 shadow-sm">
@@ -88,107 +62,62 @@
           </div>
           <span id="timer-display" class="font-mono font-black text-amber-100 bg-amber-900 border border-amber-700 px-2.5 py-0.5 rounded-xl">30:00</span>
         </div>
-        <p class="text-xs font-bold text-amber-300">Bitte noch nichts essen. Tirosint benötigt nüchternen Magen.</p>
+        <p class="text-xs font-bold text-amber-300">Bitte noch nichts essen. Nüchterner Magen erforderlich.</p>
       </div>
 
       <!-- Morgens Section -->
       <div class="space-y-3">
         <div class="flex items-center gap-2 text-slate-200 font-black text-sm uppercase tracking-wider px-1">
           <i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
-          <span>Morgens (07:30 Uhr)</span>
+          <span>Morgens</span>
         </div>
-
-        <!-- Tirosint Item -->
-        <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-4 flex items-center justify-between shadow-sm">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <h3 class="font-black text-white text-lg">Tirosint</h3>
-              <span class="bg-sky-950 text-sky-300 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-sky-800">Weichkapsel</span>
-            </div>
-            <p class="text-xs font-medium text-slate-400">Nüchtern mit Wasser (danach 30 Min. warten)</p>
-          </div>
-          <div class="text-right flex items-center gap-3">
-            <div class="text-emerald-400 font-black text-xl leading-none" id="tirosint-dose-display">150 <span class="text-xs font-bold">µg</span></div>
-            <button id="tirosint-check-btn" onclick="toggleTirosint()" class="w-11 h-11 rounded-2xl border-2 border-slate-600 flex items-center justify-center text-slate-500 transition-all active:scale-95 shadow-sm">
-              <i data-lucide="check" class="w-7 h-7"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Vitamin D3 Item -->
-        <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-4 flex items-center justify-between shadow-sm">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <h3 class="font-black text-white text-lg">Vitamin D3</h3>
-              <span class="bg-amber-950 text-amber-300 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-amber-800">Alle 2 Tage</span>
-            </div>
-            <p class="text-xs font-medium text-slate-400">5 Tropfen einnehmen</p>
-          </div>
-          <div class="text-right flex items-center gap-3">
-            <div class="text-slate-200 font-black text-base">5 Tropfen</div>
-            <button id="vitd-check-btn" onclick="toggleVitD()" class="w-11 h-11 rounded-2xl border-2 border-slate-600 flex items-center justify-center text-slate-500 transition-all active:scale-95 shadow-sm">
-              <i data-lucide="check" class="w-7 h-7"></i>
-            </button>
-          </div>
-        </div>
+        <div id="morgens-list" class="space-y-3"></div>
       </div>
 
       <!-- Abends Section -->
       <div class="space-y-3 pt-1">
         <div class="flex items-center gap-2 text-slate-200 font-black text-sm uppercase tracking-wider px-1">
           <i data-lucide="moon" class="w-4 h-4 text-indigo-400"></i>
-          <span>Abends (21:00 Uhr)</span>
+          <span>Abends</span>
         </div>
-
-        <!-- Magnesium Item -->
-        <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-4 flex items-center justify-between shadow-sm">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <h3 class="font-black text-white text-lg">Magnesium</h3>
-              <span class="bg-indigo-950 text-indigo-300 text-xs px-2.5 py-0.5 rounded-lg font-extrabold border border-indigo-800">Täglich</span>
-            </div>
-            <p class="text-xs font-medium text-slate-400">1 Dosis vor dem Schlafen</p>
-          </div>
-          <div class="text-right flex items-center gap-3">
-            <div class="text-slate-200 font-black text-base">1x Abends</div>
-            <button id="mag-check-btn" onclick="toggleMagnesium()" class="w-11 h-11 rounded-2xl border-2 border-slate-600 flex items-center justify-center text-slate-500 transition-all active:scale-95 shadow-sm">
-              <i data-lucide="check" class="w-7 h-7"></i>
-            </button>
-          </div>
-        </div>
+        <div id="abends-list" class="space-y-3"></div>
       </div>
-
-      <!-- Dynamisch hinzugefügte Items -->
-      <div id="custom-items-list" class="space-y-3 pt-1"></div>
 
     </div>
 
     <!-- Bottom Notification -->
     <div class="p-3 bg-slate-900 border-t border-slate-800 text-center absolute bottom-0 w-full">
-      <p class="text-xs font-bold text-slate-400">Erinnerungen aktiv für Morgens &amp; Abends</p>
+      <p class="text-xs font-bold text-slate-400">Tägliche Einnahmen im Blick</p>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal für neue Einträge -->
     <div id="edit-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
       <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 w-full max-w-xs space-y-4 shadow-2xl text-slate-100">
         <div class="flex justify-between items-center">
-          <h3 class="font-extrabold text-white text-lg">Eintrag hinzufügen</h3>
+          <h3 class="font-extrabold text-white text-lg">Präparat hinzufügen</h3>
           <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
         
         <div class="space-y-3 text-xs">
           <div>
-            <label class="font-bold text-slate-300 text-xs">Name des Präparats</label>
-            <input type="text" id="new-name" placeholder="z.B. Zink" class="w-full mt-1 p-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-emerald-500 text-sm font-semibold text-white placeholder-slate-500">
+            <label class="font-bold text-slate-300 text-xs">Name</label>
+            <input type="text" id="new-name" placeholder="z.B. Tirosint" class="w-full mt-1 p-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-emerald-500 text-sm font-semibold text-white placeholder-slate-500">
           </div>
           <div>
-            <label class="font-bold text-slate-300 text-xs">Dosierung / Einnahmehinweis</label>
-            <input type="text" id="new-dose" placeholder="z.B. 1 Tablette" class="w-full mt-1 p-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-emerald-500 text-sm font-semibold text-white placeholder-slate-500">
+            <label class="font-bold text-slate-300 text-xs">Dosierung / Hinweis</label>
+            <input type="text" id="new-dose" placeholder="z.B. 150 µg" class="w-full mt-1 p-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-emerald-500 text-sm font-semibold text-white placeholder-slate-500">
+          </div>
+          <div>
+            <label class="font-bold text-slate-300 text-xs">Tageszeit</label>
+            <select id="new-time" class="w-full mt-1 p-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-emerald-500 text-sm font-semibold text-white">
+              <option value="morgens">Morgens (07:30 Uhr)</option>
+              <option value="abends">Abends (21:00 Uhr)</option>
+            </select>
           </div>
         </div>
 
         <div class="flex gap-2 pt-2">
-          <button onclick="closeModal()" class="w-1/2 py-3 rounded-xl border border-slate-700 font-bold text-slate-300 text-xs hover:bg-slate-700">Abbrechen</button>
+          <button onclick="closeModal()" class="w-1/2 py-3 rounded-xl border border-slate-700 font-bold text-slate-300 text-xs hover:bg-slate-700">Abbrechen</option>
           <button onclick="addCustomItem()" class="w-1/2 py-3 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 shadow-lg shadow-emerald-900/50">Speichern</button>
         </div>
       </div>
@@ -200,13 +129,32 @@
     lucide.createIcons();
 
     const KUR_START_DATE = new Date(2026, 9, 31);
+    const todayStr = new Date().toDateString();
+    const lastSavedDate = localStorage.getItem('last_saved_date');
+
+    // Standard-Medikamente beim ersten Start oder Reset
+    let defaultItems = [
+      { id: 'def_1', name: 'Tirosint', dose: '150 µg', info: 'Weichkapsel (Nüchtern)', time: 'morgens', taken: false },
+      { id: 'def_2', name: 'Vitamin D3', dose: '5 Tropfen', info: 'Alle 2 Tage', time: 'morgens', taken: false },
+      { id: 'def_3', name: 'Magnesium', dose: '1x Abends', info: 'Vor dem Schlafen', time: 'abends', taken: false }
+    ];
+
+    if (!localStorage.getItem('med_items')) {
+      localStorage.setItem('med_items', JSON.stringify(defaultItems));
+    }
+
+    // Automatischer täglicher Reset um Mitternacht
+    if (lastSavedDate !== todayStr) {
+      let items = JSON.parse(localStorage.getItem('med_items') || '[]');
+      items = items.map(i => ({ ...i, taken: false }));
+      localStorage.setItem('med_items', JSON.stringify(items));
+      localStorage.removeItem('timer_end_time');
+      localStorage.setItem('last_saved_date', todayStr);
+    }
 
     let state = {
-      tirosintTaken: localStorage.getItem('tirosint_taken') === 'true',
-      vitdTaken: localStorage.getItem('vitd_taken') === 'true',
-      magTaken: localStorage.getItem('mag_taken') === 'true',
       timerEndTime: localStorage.getItem('timer_end_time') ? parseInt(localStorage.getItem('timer_end_time')) : null,
-      customItems: JSON.parse(localStorage.getItem('custom_items') || '[]')
+      items: JSON.parse(localStorage.getItem('med_items') || '[]')
     };
 
     let timerInterval = null;
@@ -215,63 +163,72 @@
       const today = new Date();
       const diffTime = today - KUR_START_DATE;
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const container = document.getElementById('kur-card-container');
 
-      const badge = document.getElementById('kur-badge');
-      const progressBar = document.getElementById('kur-progress-bar');
-      const doseDisplay = document.getElementById('tirosint-dose-display');
-      const todayDoseInfo = document.getElementById('today-dose-info');
-      const kurInfoText = document.getElementById('kur-info-text');
-
-      if (diffDays < 0) {
-        badge.innerText = "Kur startet morgen (31.10.)";
-        progressBar.style.width = "0%";
-        doseDisplay.innerHTML = `150 <span class="text-xs font-bold">µg</span>`;
-        todayDoseInfo.innerText = "Morgen: 150 µg";
-        kurInfoText.innerText = "Start: 31.10.2026";
-      } else if (diffDays < 14) {
-        const currentDay = diffDays + 1;
-        const is150Day = (diffDays % 2 === 0);
-        const dose = is150Day ? "150" : "137,5";
-        
-        badge.innerText = `Tag ${currentDay} von 14`;
-        const progressPct = Math.round((currentDay / 14) * 100);
-        progressBar.style.width = `${progressPct}%`;
-        doseDisplay.innerHTML = `${dose} <span class="text-xs font-bold">µg</span>`;
-        todayDoseInfo.innerText = `Heute: ${dose} µg`;
-        kurInfoText.innerText = `Fortschritt: ${progressPct}%`;
-      } else {
-        badge.innerText = "14-Tage Kur beendet";
-        progressBar.style.width = "100%";
-        todayDoseInfo.innerText = "Kur abgeschlossen";
+      if (diffDays < 0 || diffDays >= 14) {
+        container.innerHTML = ''; // Ausblenden, wenn die Kur vorbei oder noch nicht aktiv ist
+        return;
       }
+
+      const currentDay = diffDays + 1;
+      const is150Day = (diffDays % 2 === 0);
+      const dose = is150Day ? "150" : "137,5";
+      const progressPct = Math.round((currentDay / 14) * 100);
+
+      container.innerHTML = `
+        <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-4 space-y-3 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div class="flex items-center gap-3">
+              <div class="text-white bg-gradient-to-r from-emerald-500 to-teal-600 p-2.5 rounded-2xl shadow-md">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h2 class="font-extrabold text-white text-base">14-Tage Wechselkur</h2>
+                <p class="text-xs font-semibold text-slate-400">150 µg ↔ 137,5 µg im Wechsel</p>
+              </div>
+            </div>
+            <span class="bg-emerald-950 text-emerald-300 text-xs font-extrabold px-3 py-1 rounded-full border border-emerald-700">
+              Tag ${currentDay} von 14
+            </span>
+          </div>
+          <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden p-0.5 border border-slate-600">
+            <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500" style="width: ${progressPct}%"></div>
+          </div>
+          <div class="flex justify-between items-center text-xs text-slate-300 font-bold pt-0.5">
+            <span>Fortschritt: ${progressPct}%</span>
+            <span class="font-black text-emerald-400 text-base">Heute: ${dose} µg</span>
+          </div>
+        </div>
+      `;
     }
 
-    function toggleTirosint() {
-      state.tirosintTaken = !state.tirosintTaken;
-      localStorage.setItem('tirosint_taken', state.tirosintTaken);
-
-      if (state.tirosintTaken) {
-        state.timerEndTime = Date.now() + (30 * 60 * 1000);
-        localStorage.setItem('timer_end_time', state.timerEndTime);
-        startTimer();
-      } else {
-        state.timerEndTime = null;
-        localStorage.removeItem('timer_end_time');
-        stopTimer();
-      }
-      updateUI();
+    function toggleItem(id) {
+      state.items = state.items.map(item => {
+        if (item.id === id) {
+          item.taken = !item.taken;
+          // Wenn Tirosint abgehakt wird, starte den 30-Minuten-Timer
+          if (item.name.toLowerCase().includes('tirosint')) {
+            if (item.taken) {
+              state.timerEndTime = Date.now() + (30 * 60 * 1000);
+              localStorage.setItem('timer_end_time', state.timerEndTime);
+              startTimer();
+            } else {
+              state.timerEndTime = null;
+              localStorage.removeItem('timer_end_time');
+              stopTimer();
+            }
+          }
+        }
+        return item;
+      });
+      localStorage.setItem('med_items', JSON.stringify(state.items));
+      renderItems();
     }
 
-    function toggleVitD() {
-      state.vitdTaken = !state.vitdTaken;
-      localStorage.setItem('vitd_taken', state.vitdTaken);
-      updateUI();
-    }
-
-    function toggleMagnesium() {
-      state.magTaken = !state.magTaken;
-      localStorage.setItem('mag_taken', state.magTaken);
-      updateUI();
+    function deleteItem(id) {
+      state.items = state.items.filter(item => item.id !== id);
+      localStorage.setItem('med_items', JSON.stringify(state.items));
+      renderItems();
     }
 
     function startTimer() {
@@ -282,7 +239,7 @@
         const remainingMs = state.timerEndTime - Date.now();
         if (remainingMs <= 0) {
           stopTimer();
-          document.getElementById('timer-display').innerText = "00:00 - Essenspause vorbei!";
+          document.getElementById('timer-display').innerText = "00:00 - Pause vorbei!";
           return;
         }
         const mins = Math.floor(remainingMs / 60000);
@@ -300,77 +257,64 @@
       document.getElementById('timer-card').classList.add('hidden');
     }
 
-    function updateUI() {
-      const tBtn = document.getElementById('tirosint-check-btn');
-      tBtn.className = state.tirosintTaken ? "w-11 h-11 rounded-2xl bg-emerald-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-900/50" : "w-11 h-11 rounded-2xl border-2 border-slate-600 text-slate-500 flex items-center justify-center transition-all active:scale-95 shadow-sm";
-
-      const vBtn = document.getElementById('vitd-check-btn');
-      vBtn.className = state.vitdTaken ? "w-11 h-11 rounded-2xl bg-emerald-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-900/50" : "w-11 h-11 rounded-2xl border-2 border-slate-600 text-slate-500 flex items-center justify-center transition-all active:scale-95 shadow-sm";
-
-      const mBtn = document.getElementById('mag-check-btn');
-      mBtn.className = state.magTaken ? "w-11 h-11 rounded-2xl bg-emerald-600 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95 shadow-md shadow-emerald-900/50" : "w-11 h-11 rounded-2xl border-2 border-slate-600 text-slate-500 flex items-center justify-center transition-all active:scale-95 shadow-sm";
-
-      if (state.timerEndTime && state.timerEndTime > Date.now()) {
-        startTimer();
-      }
-
-      renderCustomItems();
-    }
-
-    function openModal() { 
-      document.getElementById('edit-modal').classList.remove('hidden'); 
-    }
-    
-    function closeModal() { 
-      document.getElementById('edit-modal').classList.add('hidden'); 
-    }
+    function openModal() { document.getElementById('edit-modal').classList.remove('hidden'); }
+    function closeModal() { document.getElementById('edit-modal').classList.add('hidden'); }
 
     function addCustomItem() {
       const name = document.getElementById('new-name').value.trim();
       const dose = document.getElementById('new-dose').value.trim();
+      const time = document.getElementById('new-time').value;
       if (!name) return;
 
-      state.customItems.push({ id: Date.now(), name, dose, taken: false });
-      localStorage.setItem('custom_items', JSON.stringify(state.customItems));
+      state.items.push({ id: 'item_' + Date.now(), name, dose, info: 'Individuell', time, taken: false });
+      localStorage.setItem('med_items', JSON.stringify(state.items));
       
       document.getElementById('new-name').value = '';
       document.getElementById('new-dose').value = '';
       closeModal();
-      renderCustomItems();
+      renderItems();
     }
 
-    function toggleCustomItem(id) {
-      state.customItems = state.customItems.map(item => {
-        if (item.id === id) item.taken = !item.taken;
-        return item;
-      });
-      localStorage.setItem('custom_items', JSON.stringify(state.customItems));
-      renderCustomItems();
-    }
-
-    function renderCustomItems() {
-      const container = document.getElementById('custom-items-list');
-      container.innerHTML = '';
+    function renderItems() {
+      const morgensContainer = document.getElementById('morgens-list');
+      const abendsContainer = document.getElementById('abends-list');
+      morgensContainer.innerHTML = '';
+      abendsContainer.innerHTML = '';
       
-      state.customItems.forEach(item => {
+      state.items.forEach(item => {
         const div = document.createElement('div');
         div.className = "bg-slate-800/90 border border-slate-700 rounded-3xl p-4 flex items-center justify-between shadow-sm";
         div.innerHTML = `
           <div class="space-y-1">
             <h3 class="font-black text-white text-lg">${item.name}</h3>
-            <p class="text-xs font-medium text-slate-400">${item.dose}</p>
+            <p class="text-xs font-medium text-slate-400">${item.dose} — ${item.info}</p>
           </div>
-          <button onclick="toggleCustomItem(${item.id})" class="w-11 h-11 rounded-2xl ${item.taken ? 'bg-emerald-600 border-emerald-500 text-white shadow-md shadow-emerald-900/50' : 'border-2 border-slate-600 text-slate-500 shadow-sm'} flex items-center justify-center transition-all active:scale-95">
-            <i data-lucide="check" class="w-7 h-7"></i>
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="deleteItem('${item.id}')" class="p-2 text-slate-500 hover:text-red-400 transition-colors">
+              <i data-lucide="trash-2" class="w-5 h-5"></i>
+            </button>
+            <button onclick="toggleItem('${item.id}')" class="w-11 h-11 rounded-2xl ${item.taken ? 'bg-emerald-600 border-emerald-500 text-white shadow-md shadow-emerald-900/50' : 'border-2 border-slate-600 text-slate-500 shadow-sm'} flex items-center justify-center transition-all active:scale-95">
+              <i data-lucide="check" class="w-7 h-7"></i>
+            </button>
+          </div>
         `;
-        container.appendChild(div);
+
+        if (item.time === 'morgens') {
+          morgensContainer.appendChild(div);
+        } else {
+          abendsContainer.appendChild(div);
+        }
       });
+
+      if (state.timerEndTime && state.timerEndTime > Date.now()) {
+        startTimer();
+      }
+
       lucide.createIcons();
     }
 
     initKurStatus();
-    updateUI();
+    renderItems();
   </script>
 </body>
 </html>
