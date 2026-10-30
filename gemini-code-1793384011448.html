@@ -7,9 +7,14 @@
   
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#f8fafc">
+  <meta name="theme-color" content="#059669">
   
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Tirosint App","short_name":"Tirosint","start_url":".","display":"standalone","background_color":"#f8fafc","theme_color":"#f8fafc"}'>
+  <!-- Hochauflösendes App-Icon (SVG mit Verlauf & Medikamenten-Symbol) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23059669'/><stop offset='100%' stop-color='%23047857'/></linearGradient></defs><rect width='512' height='512' rx='128' fill='url(%23bg)'/><g transform='translate(106, 106) scale(12.5)' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z'/><path d='m8.5 8.5 7 7'/></g></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23059669'/><stop offset='100%' stop-color='%23047857'/></linearGradient></defs><rect width='512' height='512' rx='128' fill='url(%23bg)'/><g transform='translate(106, 106) scale(12.5)' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z'/><path d='m8.5 8.5 7 7'/></g></svg>">
+
+  <!-- App Manifest -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Tirosint & Supplements","short_name":"Tirosint","start_url":".","display":"standalone","background_color":"#f8fafc","theme_color":"#059669","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27><defs><linearGradient id=%27bg%27 x1=%270%%27 y1=%270%%27 x2=%27100%%27 y2=%27100%%27><stop offset=%270%%27 stop-color=%27%23059669%27/><stop offset=%27100%%27 stop-color=%27%23047857%27/></linearGradient></defs><rect width=%27512%27 height=%27512%27 rx=%27128%27 fill=%27url(%23bg)%27/><g transform=%27translate(106, 106) scale(12.5)%27 fill=%27none%27 stroke=%27%23ffffff%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><path d=%27m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z%27/><path d=%27m8.5 8.5 7 7%27/></g></svg>","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]}'>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -53,7 +58,7 @@
             </div>
             <div>
               <h2 class="font-semibold text-slate-800 text-sm">14-Tage Tirosint Wechselkur</h2>
-              <p class="text-[11px] text-slate-400">150 µg $\leftrightarrow$ 137,5 µg im Wechsel</p>
+              <p class="text-[11px] text-slate-400">150 µg ↔ 137,5 µg im Wechsel</p>
             </div>
           </div>
           <span id="kur-badge" class="bg-emerald-100/80 text-emerald-800 text-[11px] font-medium px-2.5 py-1 rounded-full">
@@ -71,7 +76,7 @@
         </div>
       </div>
 
-      <!-- Timer Card (erscheint nach Tirosint-Einnahme) -->
+      <!-- Timer Card -->
       <div id="timer-card" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-amber-800 font-semibold text-sm">
@@ -166,7 +171,7 @@
       <p class="text-xs text-slate-400">Erinnerungen sind aktiv für Morgens &amp; Abends</p>
     </div>
 
-    <!-- Modal für das Hinzufügen / Bearbeiten auf dem Handy -->
+    <!-- Modal -->
     <div id="edit-modal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-3xl p-5 w-full max-w-sm space-y-4 shadow-2xl">
         <div class="flex justify-between items-center">
@@ -197,9 +202,8 @@
   <script>
     lucide.createIcons();
 
-    const KUR_START_DATE = new Date(2026, 9, 31); // 31. Oktober 2026
+    const KUR_START_DATE = new Date(2026, 9, 31);
 
-    // Speicher-Zustände
     let state = {
       tirosintTaken: localStorage.getItem('tirosint_taken') === 'true',
       vitdTaken: localStorage.getItem('vitd_taken') === 'true',
@@ -250,7 +254,6 @@
       localStorage.setItem('tirosint_taken', state.tirosintTaken);
 
       if (state.tirosintTaken) {
-        // Start 30 Min Timer
         state.timerEndTime = Date.now() + (30 * 60 * 1000);
         localStorage.setItem('timer_end_time', state.timerEndTime);
         startTimer();
@@ -301,31 +304,15 @@
     }
 
     function updateUI() {
-      // Tirosint Btn
       const tBtn = document.getElementById('tirosint-check-btn');
-      if (state.tirosintTaken) {
-        tBtn.className = "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95";
-      } else {
-        tBtn.className = "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
-      }
+      tBtn.className = state.tirosintTaken ? "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
 
-      // Vit D Btn
       const vBtn = document.getElementById('vitd-check-btn');
-      if (state.vitdTaken) {
-        vBtn.className = "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95";
-      } else {
-        vBtn.className = "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
-      }
+      vBtn.className = state.vitdTaken ? "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
 
-      // Magnesium Btn
       const mBtn = document.getElementById('mag-check-btn');
-      if (state.magTaken) {
-        mBtn.className = "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95";
-      } else {
-        mBtn.className = "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
-      }
+      mBtn.className = state.magTaken ? "w-10 h-10 rounded-xl bg-emerald-500 border-emerald-500 text-white flex items-center justify-center transition-all active:scale-95" : "w-10 h-10 rounded-xl border-2 border-slate-200 text-slate-300 flex items-center justify-center transition-all active:scale-95";
 
-      // Timer Check bei Reload
       if (state.timerEndTime && state.timerEndTime > Date.now()) {
         startTimer();
       }
@@ -333,7 +320,6 @@
       renderCustomItems();
     }
 
-    // Modal Funktionen
     function openModal() { document.getElementById('edit-modal').classList.remove('hidden'); }
     function closeModal() { document.getElementById('edit-modal').classList.add('hidden'); }
 
