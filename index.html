@@ -83,13 +83,18 @@
             margin-top: 2px;
         }
 
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
         .btn-icon {
             background: var(--badge-bg);
             border: 1px solid var(--card-border);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -102,8 +107,8 @@
         }
 
         .btn-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
         }
 
@@ -221,6 +226,7 @@
         .tag-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
         .tag-orange { background: rgba(249, 115, 22, 0.15); color: #fb923c; }
         .tag-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .tag-green { background: rgba(16, 185, 129, 0.15); color: #34d399; }
 
         .item-desc {
             font-size: 13px;
@@ -231,7 +237,7 @@
         .item-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .item-dose {
@@ -245,6 +251,29 @@
             font-size: 11px;
             color: var(--text-muted);
             font-weight: 400;
+        }
+
+        .row-action-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .row-action-btn:hover {
+            color: var(--text-main);
+        }
+
+        .row-action-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
         }
 
         /* Checkbox Button */
@@ -342,6 +371,8 @@
             width: 100%;
             max-width: 400px;
             padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-header {
@@ -403,12 +434,18 @@
             color: var(--text-muted);
             border: 1px solid var(--card-border);
         }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header mit Zahnrad -->
+        <!-- Header -->
         <div class="header">
             <div class="header-left">
                 <div class="app-icon">
@@ -419,10 +456,16 @@
                     <p id="current-date">Freitag, 30. Oktober 2026</p>
                 </div>
             </div>
-            <button class="btn-icon" onclick="openSettingsModal()" title="Einstellungen">
-                <!-- Zahnrad Symbol -->
-                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            </button>
+            <div class="header-actions">
+                <button class="btn-icon" onclick="openAddModal()" title="Neuen Eintrag hinzufügen">
+                    <!-- Plus Symbol -->
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </button>
+                <button class="btn-icon" onclick="openSettingsModal()" title="Einstellungen (Startdatum)">
+                    <!-- Zahnrad Symbol -->
+                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </button>
+            </div>
         </div>
 
         <!-- 14-Tage Wechselkur Card -->
@@ -442,87 +485,22 @@
             </div>
         </div>
 
-        <!-- Morgens Sektion -->
-        <div class="section-label">☀️ Morgens (07:30 Uhr)</div>
-
-        <div class="item-row">
-            <div class="item-info">
-                <div class="item-title-line">
-                    <span class="item-name">Tirosint</span>
-                    <span class="tag tag-blue">Weichkapsel</span>
-                </div>
-                <div class="item-desc">Nüchtern mit Wasser (danach 30 Min. warten)</div>
-            </div>
-            <div class="item-right">
-                <div class="item-dose" id="current-tirosint-dose">
-                    150<span>µg</span>
-                </div>
-                <button class="check-btn" id="btn-tirosint" onclick="toggleTirosint()">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- 30 Minuten Timer Box -->
-        <div class="timer-box" id="timer-box">
-            <div class="timer-text">⏳ 30 Minuten Wartezeit bis zum Frühstück</div>
-            <div class="timer-countdown" id="timer-countdown">30:00</div>
-        </div>
-
-        <div class="item-row">
-            <div class="item-info">
-                <div class="item-title-line">
-                    <span class="item-name">Vitamin D3</span>
-                    <span class="tag tag-orange">Alle 2 Tage</span>
-                </div>
-                <div class="item-desc" id="vitd-desc">5 Tropfen einnehmen</div>
-            </div>
-            <div class="item-right">
-                <div class="item-dose">5<span>Tropfen</span></div>
-                <button class="check-btn" id="btn-vitd" onclick="toggleItem('vitd')">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Abends Sektion -->
-        <div class="section-label">🌙 Abends (18:30 Uhr)</div>
-
-        <div class="item-row">
-            <div class="item-info">
-                <div class="item-title-line">
-                    <span class="item-name">Magnesium</span>
-                    <span class="tag tag-purple">Täglich</span>
-                </div>
-                <div class="item-desc">1 Dosis vor dem Schlafen</div>
-            </div>
-            <div class="item-right">
-                <div class="item-dose">1x<span>Abends</span></div>
-                <button class="check-btn" id="btn-magnesium" onclick="toggleItem('magnesium')">
-                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </button>
-            </div>
-        </div>
+        <!-- Dynamischer Container für Medikamente & Supplements -->
+        <div id="meds-container"></div>
 
         <div class="footer-note">Erinnerungen aktiv für Morgens & Abends</div>
     </div>
 
-    <!-- Modal für Einstellungen -->
+    <!-- Modal für Einstellungen (Startdatum) -->
     <div class="modal" id="settings-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Einstellungen & Verwaltung</h3>
+                <h3>Kur-Einstellungen</h3>
                 <button class="btn-icon" onclick="closeSettingsModal()">✕</button>
             </div>
             <div class="form-group">
                 <label>Startdatum der 14-Tage-Kur</label>
                 <input type="date" id="start-date-input" class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Information</label>
-                <p style="font-size:12px; color: var(--text-muted); line-height: 1.4;">
-                    Hier kannst du das Startdatum anpassen, falls sich der Rhythmus verschoben hat oder Familienmitglieder (z.B. Frau oder Vater) die App nutzen möchten.
-                </p>
             </div>
             <div class="modal-buttons">
                 <button class="btn btn-secondary" onclick="closeSettingsModal()">Abbrechen</button>
@@ -531,14 +509,58 @@
         </div>
     </div>
 
+    <!-- Modal für Hinzufügen / Bearbeiten von Einträgen -->
+    <div class="modal" id="item-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="item-modal-title">Eintrag hinzufügen</h3>
+                <button class="btn-icon" onclick="closeItemModal()">✕</button>
+            </div>
+            <input type="hidden" id="edit-item-id">
+            <div class="form-group">
+                <label>Name (z.B. Tirosint, Magnesium)</label>
+                <input type="text" id="form-name" class="form-control" placeholder="Name eingeben">
+            </div>
+            <div class="form-group">
+                <label>Kategorie / Tag (z.B. Weichkapsel, Täglich)</label>
+                <input type="text" id="form-tag" class="form-control" placeholder="z.B. Weichkapsel">
+            </div>
+            <div class="form-group">
+                <label>Dosierung / Einheit (z.B. 150 µg, 5 Tropfen)</label>
+                <input type="text" id="form-dose" class="form-control" placeholder="z.B. 150 µg">
+            </div>
+            <div class="form-group">
+                <label>Beschreibung / Hinweis</label>
+                <input type="text" id="form-desc" class="form-control" placeholder="z.B. Nüchtern mit Wasser">
+            </div>
+            <div class="form-group">
+                <label>Tageszeit</label>
+                <select id="form-time" class="form-control">
+                    <option value="morgens">Morgens (07:30 Uhr)</option>
+                    <option value="abends">Abends (18:30 Uhr)</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-danger" id="btn-delete-item" onclick="deleteCurrentItem()" style="display:none;">Löschen</button>
+                <button class="btn btn-secondary" onclick="closeItemModal()">Abbrechen</button>
+                <button class="btn btn-primary" onclick="saveItemForm()">Speichern</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Standard-Einträge falls noch nichts gespeichert
+        const defaultItems = [
+            { id: 'tirosint', name: 'Tirosint', tag: 'Weichkapsel', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser (danach 30 Min. warten)', time: 'morgens', isTirosint: true },
+            { id: 'vitd', name: 'Vitamin D3', tag: 'Alle 2 Tage', tagClass: 'tag-orange', dose: '5', unit: 'Tropfen', desc: '5 Tropfen einnehmen', time: 'morgens', isTirosint: false },
+            { id: 'magnesium', name: 'Magnesium', tag: 'Täglich', tagClass: 'tag-purple', dose: '1x', unit: 'Abends', desc: '1 Dosis vor dem Schlafen', time: 'abends', isTirosint: false }
+        ];
+
+        let items = JSON.parse(localStorage.getItem("tirosint_custom_items")) || defaultItems;
+
         // Datum und Kur-Logik
         const startDateKey = "tirosint_start_date";
-        let startDate = localStorage.getItem(startDateKey);
-        if (!startDate) {
-            startDate = "2026-10-31";
-            localStorage.setItem(startDateKey, startDate);
-        }
+        let startDate = localStorage.getItem(startDateKey) || "2026-10-31";
 
         function updateKurInfo() {
             const start = new Date(startDate);
@@ -557,28 +579,107 @@
 
             document.getElementById("kur-tag-badge").innerText = `Tag ${currentDayInCycle} von 14`;
             document.getElementById("today-dose-text").innerText = `Heute: ${dose}`;
-            document.getElementById("current-tirosint-dose").innerHTML = `${is150 ? '150' : '137,5'}<span>µg</span>`;
+
+            // Wenn Tirosint in der Liste existiert, Dosis automatisch anpassen
+            items.forEach(item => {
+                if (item.isTirosint) {
+                    item.dose = is150 ? "150" : "137,5";
+                    item.unit = "µg";
+                }
+            });
 
             const progressPercent = (currentDayInCycle / 14) * 100;
             document.getElementById("progress-fill").style.width = progressPercent + "%";
+            renderItems();
         }
 
-        updateKurInfo();
-
-        // Checkboxen Status Logik
+        // Render Items auf der Oberfläche
         const todayStr = new Date().toISOString().slice(0,10);
         const storagePrefix = "med_status_" + todayStr + "_";
 
-        function loadCheckState(id) {
-            const val = localStorage.getItem(storagePrefix + id);
-            if (val === "true") {
-                document.getElementById("btn-" + id).classList.add("checked");
+        function renderItems() {
+            const container = document.getElementById("container-meds") || document.getElementById("meds-container");
+            container.innerHTML = "";
+
+            const morgensItems = items.filter(i => i.time === 'morgens');
+            const abendsItems = items.filter(i => i.time === 'abends');
+
+            let html = '';
+
+            // Morgens Sektion
+            if (morgensItems.length > 0) {
+                html += `<div class="section-label">☀️ Morgens (07:30 Uhr)</div>`;
+                morgensItems.forEach(item => {
+                    const isChecked = localStorage.getItem(storagePrefix + item.id) === "true";
+                    html += `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <div class="item-title-line">
+                                    <span class="item-name">${item.name}</span>
+                                    <span class="tag ${item.tagClass || 'tag-green'}">${item.tag}</span>
+                                </div>
+                                <div class="item-desc">${item.desc}</div>
+                            </div>
+                            <div class="item-right">
+                                <div class="item-dose">${item.dose}<span>${item.unit}</span></div>
+                                <button class="row-action-btn" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
+                                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                </button>
+                                <button class="check-btn ${isChecked ? 'checked' : ''}" id="btn-${item.id}" onclick="${item.isTirosint ? 'toggleTirosint()' : `toggleItem('${item.id}')`}">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Timer Box unter Morgens
+                html += `
+                    <div class="timer-box" id="timer-box">
+                        <div class="timer-text">⏳ 30 Minuten Wartezeit bis zum Frühstück</div>
+                        <div class="timer-countdown" id="timer-countdown">30:00</div>
+                    </div>
+                `;
+            }
+
+            // Abends Sektion
+            if (abendsItems.length > 0) {
+                html += `<div class="section-label">🌙 Abends (18:30 Uhr)</div>`;
+                abendsItems.forEach(item => {
+                    const isChecked = localStorage.getItem(storagePrefix + item.id) === "true";
+                    html += `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <div class="item-title-line">
+                                    <span class="item-name">${item.name}</span>
+                                    <span class="tag ${item.tagClass || 'tag-green'}">${item.tag}</span>
+                                </div>
+                                <div class="item-desc">${item.desc}</div>
+                            </div>
+                            <div class="item-right">
+                                <div class="item-dose">${item.dose}<span>${item.unit}</span></div>
+                                <button class="row-action-btn" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
+                                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                                </button>
+                                <button class="check-btn ${isChecked ? 'checked' : ''}" id="btn-${item.id}" onclick="toggleItem('${item.id}')">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = html;
+
+            // Timer-Status nach Render prüfen
+            const savedEndTime = localStorage.getItem(timerKey);
+            if (savedEndTime && savedEndTime > Date.now()) {
+                startTimer(parseInt(savedEndTime));
             }
         }
 
-        loadCheckState("tirosint");
-        loadCheckState("vitd");
-        loadCheckState("magnesium");
+        updateKurInfo();
 
         function toggleItem(id) {
             const btn = document.getElementById("btn-" + id);
@@ -587,7 +688,7 @@
             localStorage.setItem(storagePrefix + id, isChecked);
         }
 
-        // Timer Logik für Tirosint
+        // Timer Logik
         let timerInterval = null;
         const timerKey = "tirosint_timer_end_" + todayStr;
 
@@ -608,35 +709,34 @@
         }
 
         function startTimer(endTime) {
-            document.getElementById("timer-box").classList.add("active");
+            const box = document.getElementById("timer-box");
+            if (box) box.classList.add("active");
             if (timerInterval) clearInterval(timerInterval);
 
             timerInterval = setInterval(() => {
                 const timeLeft = endTime - Date.now();
+                const countdownEl = document.getElementById("timer-countdown");
+                if (!countdownEl) return;
+
                 if (timeLeft <= 0) {
-                    document.getElementById("timer-countdown").innerText = "00:00 - Zeit zum Frühstücken! 🎉";
+                    countdownEl.innerText = "00:00 - Zeit zum Frühstücken! 🎉";
                     clearInterval(timerInterval);
                     localStorage.removeItem(timerKey);
                 } else {
                     const mins = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                     const secs = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById("timer-countdown").innerText = 
-                        String(mins).padStart(2, '0') + ":" + String(secs).padStart(2, '0');
+                    countdownEl.innerText = String(mins).padStart(2, '0') + ":" + String(secs).padStart(2, '0');
                 }
             }, 1000);
         }
 
         function stopTimer() {
             if (timerInterval) clearInterval(timerInterval);
-            document.getElementById("timer-box").classList.remove("active");
+            const box = document.getElementById("timer-box");
+            if (box) box.classList.remove("active");
         }
 
-        const savedEndTime = localStorage.getItem(timerKey);
-        if (savedEndTime && savedEndTime > Date.now()) {
-            startTimer(parseInt(savedEndTime));
-        }
-
-        // Modal Funktionen für Einstellungen
+        // Modal Funktionen (Einstellungen)
         function openSettingsModal() {
             document.getElementById("start-date-input").value = startDate;
             document.getElementById("settings-modal").classList.add("open");
@@ -654,6 +754,96 @@
                 updateKurInfo();
             }
             closeSettingsModal();
+        }
+
+        // Modal Funktionen (Eintrag hinzufügen / bearbeiten)
+        function openAddModal() {
+            document.getElementById("item-modal-title").innerText = "Neuen Eintrag hinzufügen";
+            document.getElementById("edit-item-id").value = "";
+            document.getElementById("form-name").value = "";
+            document.getElementById("form-tag").value = "Täglich";
+            document.getElementById("form-dose").value = "1x";
+            document.getElementById("form-desc").value = "";
+            document.getElementById("form-time").value = "abends";
+            document.getElementById("btn-delete-item").style.display = "none";
+            document.getElementById("item-modal").classList.add("open");
+        }
+
+        function openEditItemModal(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById("item-modal-title").innerText = "Eintrag bearbeiten";
+            document.getElementById("edit-item-id").value = item.id;
+            document.getElementById("form-name").value = item.name;
+            document.getElementById("form-tag").value = item.tag;
+            document.getElementById("form-dose").value = item.dose;
+            document.getElementById("form-desc").value = item.desc;
+            document.getElementById("form-time").value = item.time;
+            
+            // Tirosint soll man nicht komplett löschen können
+            if (item.isTirosint) {
+                document.getElementById("btn-delete-item").style.display = "none";
+            } else {
+                document.getElementById("btn-delete-item").style.display = "block";
+            }
+
+            document.getElementById("item-modal").classList.add("open");
+        }
+
+        function closeItemModal() {
+            document.getElementById("item-modal").classList.remove("open");
+        }
+
+        function saveItemForm() {
+            const editId = document.getElementById("edit-item-id").value;
+            const name = document.getElementById("form-name").value;
+            const tag = document.getElementById("form-tag").value;
+            const dose = document.getElementById("form-dose").value;
+            const desc = document.getElementById("form-desc").value;
+            const time = document.getElementById("form-time").value;
+
+            if (!name) return;
+
+            if (editId) {
+                // Bearbeiten
+                const item = items.find(i => i.id === editId);
+                if (item) {
+                    item.name = name;
+                    item.tag = tag;
+                    item.dose = dose;
+                    item.desc = desc;
+                    item.time = time;
+                }
+            } else {
+                // Neu hinzufügen
+                const newId = "custom_" + Date.now();
+                items.push({
+                    id: newId,
+                    name: name,
+                    tag: tag,
+                    tagClass: 'tag-green',
+                    dose: dose,
+                    unit: '',
+                    desc: desc,
+                    time: time,
+                    isTirosint: false
+                });
+            }
+
+            localStorage.setItem("tirosint_custom_items", JSON.stringify(items));
+            closeItemModal();
+            renderItems();
+        }
+
+        function deleteCurrentItem() {
+            const editId = document.getElementById("edit-item-id").value;
+            if (!editId) return;
+
+            items = items.filter(i => i.id !== editId);
+            localStorage.setItem("tirosint_custom_items", JSON.stringify(items));
+            closeItemModal();
+            renderItems();
         }
     </script>
 </body>
