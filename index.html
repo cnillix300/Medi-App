@@ -464,7 +464,7 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        /* Kalender / Historie Grid */
+        /* Kalender / Historie Grid (jetzt 31 Tage) */
         .history-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -480,6 +480,7 @@
             text-align: center;
             padding: 4px 2px;
             font-size: 10px;
+            position: relative; /* Für das Häkchen Overlay */
         }
 
         .history-day.taken {
@@ -487,6 +488,18 @@
             border-color: var(--accent-green);
             color: var(--accent-green);
             font-weight: 700;
+        }
+
+        /* Das Häkchen, das über dem Datum liegt */
+        .history-day.taken::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: rgba(16, 185, 129, 0.6);
+            pointer-events: none;
         }
 
         /* Kleiner Schließen-Button auf der Kur-Karte */
@@ -517,14 +530,13 @@
                 </div>
                 <div class="header-title">
                     <h1>Medis & Supplements</h1>
-                    <p id="current-date">Freitag, 30. Oktober 2026</p>
+                    <p id="current-date"></p>
                 </div>
             </div>
             <div class="header-actions">
                 <button class="btn-icon" onclick="openAddModal()" title="Neuen Eintrag hinzufügen">
                     <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                 </button>
-                <!-- Der Edit-Button im Header ist jetzt exakt identisch mit denen unten! -->
                 <button class="edit-btn-frame" style="width: 32px; height: 32px;" onclick="openSettingsModal()" title="Kur-Einstellungen">
                     <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                 </button>
@@ -537,7 +549,6 @@
                 <div class="progress-title">📅 14-Tage Wechselkur</div>
                 <div style="display: flex; gap: 8px; align-items: center;">
                     <div class="progress-badge" id="kur-tag-badge">Tag 1 von 14</div>
-                    <!-- Einfacher Löschen/Ausblenden Button für deine Frau -->
                     <button class="close-card-btn" onclick="deleteKur()" title="Ansicht ausblenden">✕</button>
                 </div>
             </div>
@@ -634,14 +645,14 @@
         </div>
     </div>
 
-    <!-- Modal für Kalender / Historie -->
+    <!-- Modal für Kalender / Historie (31 Tage) -->
     <div class="modal" id="history-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="history-modal-title">Erfolg / Verlauf</h3>
                 <button class="btn-icon" onclick="closeHistoryModal()">✕</button>
             </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom: 6px;">Einnahme der letzten 14 Tage:</p>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom: 6px;">Einnahme der letzten 31 Tage:</p>
             <div class="history-grid" id="history-grid-container"></div>
             <div id="history-stats" style="font-size:12px; font-weight:600; color:var(--accent-green); text-align:center; margin-top: 8px;"></div>
             <div class="modal-buttons" style="margin-top: 14px;">
@@ -653,11 +664,10 @@
     <script>
         const pillIcon = `<svg class="type-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h-2zm0 6h2v2h-2z"/></svg>`;
         const dropIcon = `<svg class="type-icon" viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>`;
-        // Icon für den Verlauf Button
         const historyIcon = `<svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>`;
 
         const defaultItems = [
-            { id: 'tirosint', name: 'Tirosint', tag: 'Täglich', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser (danach warten)', timeStr: '07:30', timerMins: 30, isTirosint: true, showRhythm: false, type: 'pill' },
+            { id: 'tirosint', name: 'Tirosint', tag: 'Täglich', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser', timeStr: '07:30', timerMins: 30, isTirosint: true, showRhythm: false, type: 'pill' },
             { id: 'vitd', name: 'Vitamin D3', tag: 'Alle 2 Tage', tagClass: 'tag-orange', dose: '5', unit: 'Tropfen', desc: 'Tropfen einnehmen', timeStr: '07:45', timerMins: 0, isTirosint: false, showRhythm: true, type: 'drop' },
             { id: 'magnesium', name: 'Magnesium', tag: 'Täglich', tagClass: 'tag-purple', dose: '1x', unit: 'Abends', desc: 'Vor dem Schlafen', timeStr: '19:00', timerMins: 0, isTirosint: false, showRhythm: false, type: 'pill' }
         ];
@@ -665,6 +675,9 @@
         let items = JSON.parse(localStorage.getItem("tirosint_custom_items")) || defaultItems;
         const startDateKey = "tirosint_start_date";
         let startDate = localStorage.getItem(startDateKey) || "2026-10-31";
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("current-date").textContent = new Date().toLocaleDateString('de-DE', options);
 
         function updateKurInfo() {
             const card = document.getElementById("kur-card");
@@ -753,8 +766,7 @@
                             </div>
                             <div class="item-right">
                                 <div class="item-dose" style="margin-right:2px;">${item.dose}<span>${item.unit}</span></div>
-                                <!-- NEU: Direkter Kalender-Button für den Erfolg! -->
-                                <button class="history-btn-frame" onclick="openHistoryModal('${item.id}', '${item.name}')" title="Verlauf & Erfolg anzeigen">
+                                <button class="history-btn-frame" onclick="openHistoryModal('${item.id}', '${item.name}', '${item.tag}')" title="Verlauf & Erfolg anzeigen">
                                     ${historyIcon}
                                 </button>
                                 <button class="edit-btn-frame" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
@@ -780,7 +792,6 @@
 
         updateKurInfo();
 
-        // Audio-Signal für den Timer erzeugen (funktioniert im aktiven Tab)
         function playBeep() {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -835,7 +846,7 @@
 
                 if (timeLeft <= 0) {
                     countdownEl.innerText = "00:00 - Zeit vorbei! 🎉";
-                    playBeep(); // Ton abspielen!
+                    playBeep();
                     clearInterval(timerInterval);
                     localStorage.removeItem("global_timer_end");
                     localStorage.removeItem("global_timer_name");
@@ -853,7 +864,6 @@
             if (box) box.classList.remove("active");
         }
 
-        // Modal Einstellungen (Kur) & Lösch-Funktion für die Frau
         function openSettingsModal() {
             document.getElementById("start-date-input").value = startDate;
             document.getElementById("settings-modal").classList.add("open");
@@ -871,14 +881,13 @@
             closeSettingsModal();
         }
         function deleteKur() {
-            if(confirm("Möchtest du diese 14-Tage-Kur Ansicht ausblenden? (Kann über das blaue Stift-Symbol oben rechts jederzeit wieder aktiviert werden)")) {
+            if(confirm("Möchtest du diese Ansicht ausblenden? (Kann über das Einstellungen-Symbol oben rechts jederzeit wieder aktiviert werden)")) {
                 localStorage.removeItem(startDateKey);
                 startDate = null;
                 updateKurInfo();
             }
         }
 
-        // Modal Hinzufügen / Bearbeiten
         function openAddModal() {
             document.getElementById("item-modal-title").innerText = "Neuen Eintrag hinzufügen";
             document.getElementById("edit-item-id").value = "";
@@ -981,16 +990,16 @@
             renderItems();
         }
 
-        // Kalender / Historie Modal
-        function openHistoryModal(itemId, itemName) {
+        function openHistoryModal(itemId, itemName, itemRhythm) {
             document.getElementById("history-modal-title").innerText = `Erfolg: ${itemName}`;
             const gridContainer = document.getElementById("history-grid-container");
             gridContainer.innerHTML = "";
 
             let takenCount = 0;
             const d = new Date();
+            const daysToShow = 31; 
 
-            for (let i = 13; i >= 0; i--) {
+            for (let i = daysToShow - 1; i >= 0; i--) {
                 const pastDate = new Date();
                 pastDate.setDate(d.getDate() - i);
                 const dateStr = pastDate.toISOString().slice(0,10);
@@ -1007,7 +1016,25 @@
                 `;
             }
 
-            document.getElementById("history-stats").innerText = `Eingenommen an ${takenCount} von 14 Tagen!`;
+            let statText = "";
+            let expectedDays = daysToShow;
+            if (itemRhythm) {
+                const r = itemRhythm.toLowerCase();
+                if (r.includes('wöchentlich')) expectedDays = Math.floor(daysToShow / 7);
+                else if (r.includes('14-tägig')) expectedDays = Math.floor(daysToShow / 14);
+                else if (r.includes('alle 2 tage')) expectedDays = Math.floor(daysToShow / 2);
+                else if (r.includes('alle 3 tage')) expectedDays = Math.floor(daysToShow / 3);
+                else if (r.includes('alle 4 tage')) expectedDays = Math.floor(daysToShow / 4);
+                else if (r.includes('monatlich')) expectedDays = 1;
+            }
+
+            if (itemRhythm && itemRhythm.toLowerCase() !== 'täglich') {
+                statText = `Eingenommen an ${takenCount} von erwarteten ${expectedDays} Tagen in den letzten 31 Tagen!`;
+            } else {
+                statText = `Eingenommen an ${takenCount} von 31 Tagen!`;
+            }
+
+            document.getElementById("history-stats").innerText = statText;
             document.getElementById("history-modal").classList.add("open");
         }
 
