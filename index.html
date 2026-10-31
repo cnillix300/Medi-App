@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tirosint & Supplements</title>
+    <title>Medis & Supplements</title>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -254,14 +254,14 @@
             font-weight: 400;
         }
 
-        /* Stift-Icon im kleinen Rahmen */
+        /* Stift-Icon im farblich hinterlegten Rahmen */
         .edit-btn-frame {
-            background: var(--badge-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -270,13 +270,12 @@
         }
 
         .edit-btn-frame:hover {
-            color: var(--text-main);
-            border-color: var(--accent-green);
+            background: rgba(59, 130, 246, 0.25);
         }
 
         .edit-btn-frame svg {
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
         }
 
@@ -481,7 +480,7 @@
                     <svg viewBox="0 0 24 24"><path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15zM10.5 4.5C10.5 3.67 11.17 3 12 3s1.5.67 1.5 1.5v15c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-15z"/></svg>
                 </div>
                 <div class="header-title">
-                    <h1>Tirosint & Supplements</h1>
+                    <h1>Medis & Supplements</h1>
                     <p id="current-date">Freitag, 30. Oktober 2026</p>
                 </div>
             </div>
@@ -490,7 +489,7 @@
                     <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                 </button>
                 <button class="btn-icon" onclick="openSettingsModal()" title="Einstellungen">
-                    <div class="edit-btn-frame" style="border:none; background:transparent; width:auto; height:auto;">
+                    <div class="edit-btn-frame" style="width:auto; height:auto; padding:4px;">
                         <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                     </div>
                 </button>
@@ -514,13 +513,13 @@
             </div>
         </div>
 
-        <!-- Dynamischer Container für Medikamente & Supplements -->
+        <!-- Dynamischer Container für Kategorien -->
         <div id="meds-container"></div>
 
         <div class="footer-note">Erinnerungen aktiv für alle Einträge</div>
     </div>
 
-    <!-- Modal für Einstellungen (Startdatum) -->
+    <!-- Modal für Einstellungen -->
     <div class="modal" id="settings-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -538,7 +537,7 @@
         </div>
     </div>
 
-    <!-- Modal für Hinzufügen / Bearbeiten von Einträgen -->
+    <!-- Modal für Hinzufügen / Bearbeiten -->
     <div class="modal" id="item-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -547,7 +546,7 @@
             </div>
             <input type="hidden" id="edit-item-id">
             <div class="form-group">
-                <label>Name (z.B. Magnesium, Vitamin D3)</label>
+                <label>Name (z.B. Tirosint, Vitamin D3)</label>
                 <input type="text" id="form-name" class="form-control" placeholder="Name eingeben">
             </div>
             <div class="form-group">
@@ -555,25 +554,28 @@
                 <select id="form-rhythm" class="form-control">
                     <option value="Täglich">Täglich</option>
                     <option value="Alle 2 Tage">Alle 2 Tage</option>
+                    <option value="Alle 3 Tage">Alle 3 Tage</option>
+                    <option value="Alle 4 Tage">Alle 4 Tage</option>
                     <option value="Wöchentlich">Wöchentlich</option>
                     <option value="14-Tägig">14-Tägig</option>
+                    <option value="Monatlich">Monatlich</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Dosierung & Einheit (z.B. 1x, 5 Tropfen)</label>
-                <input type="text" id="form-dose" class="form-control" placeholder="z.B. 1x oder 5 Tropfen">
+                <label>Dosierung & Einheit (z.B. 150 µg, 5 Tropfen, 1x)</label>
+                <input type="text" id="form-dose" class="form-control" placeholder="z.B. 150 µg">
             </div>
             <div class="form-group">
-                <label>Uhrzeit (Anzeige)</label>
-                <input type="text" id="form-time-label" class="form-control" placeholder="z.B. 07:30 Uhr oder 18:30 Uhr">
+                <label>Uhrzeit (z.B. 07:30, 12:00, 18:30)</label>
+                <input type="time" id="form-time-input" class="form-control" value="07:30">
             </div>
             <div class="form-group">
                 <label>Wartezeit-Timer (0 bis 60 Minuten)</label>
-                <input type="number" id="form-timer-mins" class="form-control" min="0" max="60" value="0" placeholder="Minuten (z.B. 30)">
+                <input type="number" id="form-timer-mins" class="form-control" min="0" max="60" value="0" placeholder="Minuten">
             </div>
             <div class="form-group">
                 <label>Beschreibung / Hinweis</label>
-                <input type="text" id="form-desc" class="form-control" placeholder="z.B. Vor dem Schlafen">
+                <input type="text" id="form-desc" class="form-control" placeholder="z.B. Nüchtern mit Wasser">
             </div>
             <div class="modal-buttons">
                 <button class="btn btn-danger" id="btn-delete-item" onclick="deleteCurrentItem()" style="display:none;">Löschen</button>
@@ -583,11 +585,11 @@
         </div>
     </div>
 
-    <!-- Modal für Kalender / Erfolgs-Historie -->
+    <!-- Modal für Kalender / Historie -->
     <div class="modal" id="history-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="history-modal-title">Erfolgs-Übersicht</h3>
+                <h3 id="history-modal-title">Verlauf</h3>
                 <button class="btn-icon" onclick="closeHistoryModal()">✕</button>
             </div>
             <p style="font-size:13px; color:var(--text-muted); margin-bottom: 8px;">Letzte 14 Tage Einnahme-Verlauf:</p>
@@ -601,9 +603,9 @@
 
     <script>
         const defaultItems = [
-            { id: 'tirosint', name: 'Tirosint', tag: 'Weichkapsel', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser', timeLabel: '07:30 Uhr', timerMins: 30, isTirosint: true },
-            { id: 'vitd', name: 'Vitamin D3', tag: 'Alle 2 Tage', tagClass: 'tag-orange', dose: '5', unit: 'Tropfen', desc: '5 Tropfen einnehmen', timeLabel: '07:30 Uhr', timerMins: 0, isTirosint: false },
-            { id: 'magnesium', name: 'Magnesium', tag: 'Täglich', tagClass: 'tag-purple', dose: '1x', unit: 'Abends', desc: '1 Dosis vor dem Schlafen', timeLabel: '18:30 Uhr', timerMins: 0, isTirosint: false }
+            { id: 'tirosint', name: 'Tirosint', tag: 'Täglich', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser', timeStr: '07:30', timerMins: 30, isTirosint: true },
+            { id: 'vitd', name: 'Vitamin D3', tag: 'Alle 2 Tage', tagClass: 'tag-orange', dose: '5', unit: 'Tropfen', desc: 'Tropfen einnehmen', timeStr: '07:45', timerMins: 0, isTirosint: false },
+            { id: 'magnesium', name: 'Magnesium', tag: 'Täglich', tagClass: 'tag-purple', dose: '1x', unit: 'Abends', desc: 'Vor dem Schlafen', timeStr: '19:00', timerMins: 0, isTirosint: false }
         ];
 
         let items = JSON.parse(localStorage.getItem("tirosint_custom_items")) || defaultItems;
@@ -644,40 +646,67 @@
         const todayStr = new Date().toISOString().slice(0,10);
         const storagePrefix = "med_status_" + todayStr + "_";
 
+        function getCategory(timeStr) {
+            if (!timeStr) return { title: '☀️ Morgens (05:00 - 11:00)', sort: 1 };
+            const hour = parseInt(timeStr.split(':')[0], 10);
+            if (hour >= 5 && hour < 11) {
+                return { title: '☀️ Morgens (05:00 - 11:00)', sort: 1 };
+            } else if (hour >= 11 && hour < 14) {
+                return { title: '🍽️ Mittags (11:00 - 14:00)', sort: 2 };
+            } else {
+                return { title: '🌙 Abends (17:00 - 22:00)', sort: 3 };
+            }
+        }
+
         function renderItems() {
             const container = document.getElementById("meds-container");
             container.innerHTML = "";
 
-            let html = '';
+            // Nach Kategorien gruppieren
+            const categories = {};
             items.forEach(item => {
-                const isChecked = localStorage.getItem(storagePrefix + item.id) === "true";
-                html += `
-                    <div class="item-row">
-                        <div class="item-info" onclick="openHistoryModal('${item.id}', '${item.name}')" title="Klicken für Verlaufs-Kalender">
-                            <div class="item-title-line">
-                                <span class="item-name">${item.name}</span>
-                                <span class="tag ${item.tagClass || 'tag-green'}">${item.tag}</span>
-                            </div>
-                            <div class="item-desc">${item.desc} (${item.timeLabel || 'Täglich'})</div>
-                        </div>
-                        <div class="item-right">
-                            <div class="item-dose">${item.dose}<span>${item.unit}</span></div>
-                            <button class="edit-btn-frame" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
-                                <!-- Stift-Icon -->
-                                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                            </button>
-                            <button class="check-btn ${isChecked ? 'checked' : ''}" id="btn-${item.id}" onclick="handleCheck('${item.id}', ${item.timerMins || 0})">
-                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </button>
-                        </div>
-                    </div>
-                `;
+                const cat = getCategory(item.timeStr);
+                if (!categories[cat.title]) {
+                    categories[cat.title] = { sort: cat.sort, items: [] };
+                }
+                categories[cat.title].items.push(item);
             });
 
-            // Timer Box (falls aktiv)
+            // Sortieren nach Zeit-Kategorie
+            const sortedCatKeys = Object.keys(categories).sort((a, b) => categories[a].sort - categories[b].sort);
+
+            let html = '';
+            sortedCatKeys.forEach(catTitle => {
+                html += `<div class="section-label">${catTitle}</div>`;
+                categories[catTitle].items.forEach(item => {
+                    const isChecked = localStorage.getItem(storagePrefix + item.id) === "true";
+                    html += `
+                        <div class="item-row">
+                            <div class="item-info" onclick="openHistoryModal('${item.id}', '${item.name}')" title="Klicken für Verlauf">
+                                <div class="item-title-line">
+                                    <span class="item-name">${item.name}</span>
+                                    <span class="tag ${item.tagClass || 'tag-green'}">${item.tag}</span>
+                                </div>
+                                <div class="item-desc">${item.desc} (${item.timeStr || '07:30'} Uhr)</div>
+                            </div>
+                            <div class="item-right">
+                                <div class="item-dose">${item.dose}<span>${item.unit}</span></div>
+                                <button class="edit-btn-frame" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
+                                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                                </button>
+                                <button class="check-btn ${isChecked ? 'checked' : ''}" id="btn-${item.id}" onclick="handleCheck('${item.id}', ${item.timerMins || 0})">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            // Timer Box
             html += `
                 <div class="timer-box" id="timer-box">
-                    <div class="timer-text" id="timer-label-text">⏳ Wartezeit läuft...</div>
+                    <div class="timer-text">⏳ Wartezeit läuft...</div>
                     <div class="timer-countdown" id="timer-countdown">00:00</div>
                 </div>
             `;
@@ -686,7 +715,7 @@
 
             const savedEndTime = localStorage.getItem(timerKey);
             if (savedEndTime && savedEndTime > Date.now()) {
-                startTimer(parseInt(savedEndTime), 30);
+                startTimer(parseInt(savedEndTime));
             }
         }
 
@@ -697,15 +726,13 @@
             btn.classList.toggle("checked");
             const isChecked = btn.classList.contains("checked");
             localStorage.setItem(storagePrefix + id, isChecked);
-
-            // Auch für Historie speichern
             localStorage.setItem("history_" + id + "_" + todayStr, isChecked);
 
             if (timerMins > 0) {
                 if (isChecked) {
                     const endTime = Date.now() + timerMins * 60 * 1000;
                     localStorage.setItem(timerKey, endTime);
-                    startTimer(endTime, timerMins);
+                    startTimer(endTime);
                 } else {
                     localStorage.removeItem(timerKey);
                     stopTimer();
@@ -716,7 +743,7 @@
         let timerInterval = null;
         const timerKey = "tirosint_timer_end_" + todayStr;
 
-        function startTimer(endTime, totalMins) {
+        function startTimer(endTime) {
             const box = document.getElementById("timer-box");
             if (box) box.classList.add("active");
             if (timerInterval) clearInterval(timerInterval);
@@ -744,7 +771,7 @@
             if (box) box.classList.remove("active");
         }
 
-        // Modal Funktionen (Einstellungen)
+        // Modal Einstellungen
         function openSettingsModal() {
             document.getElementById("start-date-input").value = startDate;
             document.getElementById("settings-modal").classList.add("open");
@@ -769,7 +796,7 @@
             document.getElementById("form-name").value = "";
             document.getElementById("form-rhythm").value = "Täglich";
             document.getElementById("form-dose").value = "1x";
-            document.getElementById("form-time-label").value = "18:30 Uhr";
+            document.getElementById("form-time-input").value = "08:00";
             document.getElementById("form-timer-mins").value = "0";
             document.getElementById("form-desc").value = "";
             document.getElementById("btn-delete-item").style.display = "none";
@@ -785,7 +812,7 @@
             document.getElementById("form-name").value = item.name;
             document.getElementById("form-rhythm").value = item.tag;
             document.getElementById("form-dose").value = item.dose;
-            document.getElementById("form-time-label").value = item.timeLabel || "07:30 Uhr";
+            document.getElementById("form-time-input").value = item.timeStr || "07:30";
             document.getElementById("form-timer-mins").value = item.timerMins || 0;
             document.getElementById("form-desc").value = item.desc;
             
@@ -802,7 +829,7 @@
             const name = document.getElementById("form-name").value;
             const rhythm = document.getElementById("form-rhythm").value;
             const dose = document.getElementById("form-dose").value;
-            const timeLabel = document.getElementById("form-time-label").value;
+            const timeStr = document.getElementById("form-time-input").value;
             const timerMins = parseInt(document.getElementById("form-timer-mins").value) || 0;
             const desc = document.getElementById("form-desc").value;
 
@@ -814,7 +841,7 @@
                     item.name = name;
                     item.tag = rhythm;
                     item.dose = dose;
-                    item.timeLabel = timeLabel;
+                    item.timeStr = timeStr;
                     item.timerMins = timerMins;
                     item.desc = desc;
                 }
@@ -828,7 +855,7 @@
                     dose: dose,
                     unit: '',
                     desc: desc,
-                    timeLabel: timeLabel,
+                    timeStr: timeStr,
                     timerMins: timerMins,
                     isTirosint: false
                 });
@@ -875,7 +902,7 @@
                 `;
             }
 
-            document.getElementById("history-stats").innerText = `Angenommen an ${takenCount} von den letzten 14 Tagen`;
+            document.getElementById("history-stats").innerText = `Eingenommen an ${takenCount} von den letzten 14 Tagen`;
             document.getElementById("history-modal").classList.add("open");
         }
 
