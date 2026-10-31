@@ -464,7 +464,7 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        /* Kalender / Historie Grid (jetzt 31 Tage) */
+        /* Kalender / Historie Grid (31 Tage) */
         .history-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -480,25 +480,26 @@
             text-align: center;
             padding: 4px 2px;
             font-size: 10px;
-            position: relative; /* Für das Häkchen Overlay */
+            position: relative; /* Für das X Overlay */
         }
 
+        /* Neues Styling für erledigte Tage: Blauton mit Kreuz */
         .history-day.taken {
-            background: rgba(16, 185, 129, 0.2);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
+            background: rgba(59, 130, 246, 0.15);
+            border-color: #3b82f6;
+            color: #60a5fa;
             font-weight: 700;
         }
 
-        /* Das Häkchen, das über dem Datum liegt */
+        /* Das blaue Kreuz, das über dem Datum liegt */
         .history-day.taken::after {
-            content: "✓";
+            content: "✖";
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 16px;
-            color: rgba(16, 185, 129, 0.6);
+            font-size: 22px;
+            color: rgba(59, 130, 246, 0.45); /* Transparentes Blau, Datum bleibt gut lesbar */
             pointer-events: none;
         }
 
