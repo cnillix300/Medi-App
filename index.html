@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 16px;
+            padding: 12px;
             display: flex;
             justify-content: center;
         }
@@ -43,58 +43,59 @@
             justify-content: space-between;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 16px;
+            border-radius: 16px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .app-icon {
-            width: 48px;
-            height: 48px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
         }
 
         .app-icon svg {
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             fill: #ffffff;
         }
 
         .header-title h1 {
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-main);
         }
 
         .header-title p {
-            font-size: 13px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .header-actions {
             display: flex;
             gap: 8px;
+            align-items: center;
         }
 
         .btn-icon {
             background: var(--badge-bg);
             border: 1px solid var(--card-border);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,8 +108,8 @@
         }
 
         .btn-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
         }
 
@@ -116,56 +117,57 @@
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 16px;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+            position: relative;
         }
 
-        /* Progress Card */
+        /* Progress Card Kompakt */
         .progress-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .progress-title {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             font-weight: 600;
         }
 
         .progress-badge {
             background: rgba(16, 185, 129, 0.15);
             color: var(--accent-green);
-            font-size: 12px;
-            padding: 4px 10px;
+            font-size: 11px;
+            padding: 2px 8px;
             border-radius: 20px;
             font-weight: 600;
         }
 
         .progress-bar-bg {
             background: #1e293b;
-            height: 8px;
-            border-radius: 4px;
+            height: 6px;
+            border-radius: 3px;
             overflow: hidden;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .progress-bar-fill {
             background: var(--accent-green);
             height: 100%;
             width: 7%;
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.3s ease;
         }
 
         .progress-footer {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
         }
 
@@ -175,25 +177,25 @@
 
         /* Section Title */
         .section-label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            margin-top: 20px;
+            margin-bottom: 8px;
+            margin-top: 14px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Item Row */
+        /* Item Row Kompakt */
         .item-row {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 12px;
+            border-radius: 16px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -201,35 +203,34 @@
 
         .item-info {
             flex-grow: 1;
-            padding-right: 12px;
-            cursor: pointer;
+            padding-right: 8px;
         }
 
         .item-title-line {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
+            gap: 6px;
+            margin-bottom: 2px;
         }
 
         .item-name {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .type-icon {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             fill: var(--text-muted);
         }
 
         .tag {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 6px;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 4px;
             font-weight: 600;
         }
 
@@ -239,60 +240,70 @@
         .tag-green { background: rgba(16, 185, 129, 0.15); color: #34d399; }
 
         .item-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .item-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 6px;
         }
 
         .item-dose {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             text-align: right;
+            margin-right: 2px;
         }
 
         .item-dose span {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             font-weight: 400;
         }
 
-        /* Stift-Icon im farblichen Rahmen */
-        .edit-btn-frame {
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+        /* Verlauf / Kalender Icon */
+        .history-btn-frame {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
         }
+        .history-btn-frame:hover { background: rgba(168, 85, 247, 0.25); }
+        .history-btn-frame svg { width: 14px; height: 14px; fill: currentColor; }
 
-        .edit-btn-frame:hover {
-            background: rgba(59, 130, 246, 0.25);
+        /* Stift-Icon */
+        .edit-btn-frame {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-
-        .edit-btn-frame svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
+        .edit-btn-frame:hover { background: rgba(59, 130, 246, 0.25); }
+        .edit-btn-frame svg { width: 14px; height: 14px; fill: currentColor; }
 
         /* Checkbox Button */
         .check-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             border: 2px solid var(--card-border);
             background: transparent;
             display: flex;
@@ -303,8 +314,8 @@
         }
 
         .check-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: none;
             stroke: var(--text-muted);
             stroke-width: 3;
@@ -327,9 +338,9 @@
         .timer-box {
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 16px;
-            padding: 14px;
-            margin-bottom: 12px;
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 10px;
             display: none;
             text-align: center;
         }
@@ -339,14 +350,14 @@
         }
 
         .timer-text {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--accent-green);
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .timer-countdown {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #ffffff;
         }
@@ -354,10 +365,10 @@
         /* Footer Info */
         .footer-note {
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-top: 24px;
-            margin-bottom: 12px;
+            margin-top: 16px;
+            margin-bottom: 8px;
         }
 
         /* Modal Overlay */
@@ -379,10 +390,10 @@
         .modal-content {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
+            border-radius: 16px;
             width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            max-width: 380px;
+            padding: 18px;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -391,49 +402,49 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .modal-header h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .form-group label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .form-control {
             width: 100%;
             background: var(--bg-color);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 8px;
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .modal-buttons {
             display: flex;
             gap: 8px;
-            margin-top: 16px;
+            margin-top: 14px;
         }
 
         .btn {
             flex: 1;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 9px;
+            border-radius: 8px;
             border: none;
             font-weight: 600;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .btn-primary {
@@ -457,9 +468,9 @@
         .history-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-            margin-top: 10px;
-            margin-bottom: 16px;
+            gap: 4px;
+            margin-top: 8px;
+            margin-bottom: 12px;
         }
 
         .history-day {
@@ -467,8 +478,8 @@
             border: 1px solid var(--card-border);
             border-radius: 6px;
             text-align: center;
-            padding: 6px 2px;
-            font-size: 11px;
+            padding: 4px 2px;
+            font-size: 10px;
         }
 
         .history-day.taken {
@@ -477,6 +488,22 @@
             color: var(--accent-green);
             font-weight: 700;
         }
+
+        /* Kleiner Schließen-Button auf der Kur-Karte */
+        .close-card-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .close-card-btn:hover { background: rgba(255,255,255,0.1); color: white; }
     </style>
 </head>
 <body>
@@ -497,18 +524,22 @@
                 <button class="btn-icon" onclick="openAddModal()" title="Neuen Eintrag hinzufügen">
                     <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                 </button>
-                <button class="btn-icon" onclick="openSettingsModal()" title="Kur-Einstellungen">
-                    <div class="edit-btn-frame" style="width:auto; height:auto; padding:4px;">
-                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                    </div>
+                <!-- Der Edit-Button im Header ist jetzt exakt identisch mit denen unten! -->
+                <button class="edit-btn-frame" style="width: 32px; height: 32px;" onclick="openSettingsModal()" title="Kur-Einstellungen">
+                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                 </button>
             </div>
         </div>
 
-        <div class="card">
+        <!-- 14-Tage Wechselkur Card -->
+        <div class="card" id="kur-card">
             <div class="progress-header">
-                <div class="progress-title">📅 14-Tage Wechselkur (Tirosint)</div>
-                <div class="progress-badge" id="kur-tag-badge">Tag 1 von 14</div>
+                <div class="progress-title">📅 14-Tage Wechselkur</div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <div class="progress-badge" id="kur-tag-badge">Tag 1 von 14</div>
+                    <!-- Einfacher Löschen/Ausblenden Button für deine Frau -->
+                    <button class="close-card-btn" onclick="deleteKur()" title="Ansicht ausblenden">✕</button>
+                </div>
             </div>
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progress-fill"></div>
@@ -526,7 +557,7 @@
 
         <div id="meds-container"></div>
 
-        <div class="footer-note">Erinnerungen aktiv für alle Einträge</div>
+        <div class="footer-note">Erinnerungen & Verlauf aktiv für alle Einträge</div>
     </div>
 
     <!-- Modal für Kur-Einstellungen -->
@@ -541,9 +572,8 @@
                 <input type="date" id="start-date-input" class="form-control">
             </div>
             <div class="modal-buttons">
-                <button class="btn btn-danger" onclick="deleteKur()">Löschen</button>
                 <button class="btn btn-secondary" onclick="closeSettingsModal()">Abbrechen</button>
-                <button class="btn btn-primary" onclick="saveSettings()">Speichern</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Speichern / Aktivieren</button>
             </div>
         </div>
     </div>
@@ -561,7 +591,7 @@
                 <input type="text" id="form-name" class="form-control" placeholder="Name eingeben">
             </div>
             <div class="form-group">
-                <label>Art</label>
+                <label>Art (Icon)</label>
                 <select id="form-type" class="form-control">
                     <option value="none">Keine Auswahl</option>
                     <option value="pill">Tabletten/Kapseln</option>
@@ -581,8 +611,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Dosierung & Einheit</label>
-                <input type="text" id="form-dose" class="form-control" placeholder="z.B. 1x oder 5 Tropfen">
+                <label>Dosierung & Einheit (z.B. 1x oder 5 Tropfen)</label>
+                <input type="text" id="form-dose" class="form-control" placeholder="z.B. 5 Tropfen">
             </div>
             <div class="form-group">
                 <label>Uhrzeit</label>
@@ -608,10 +638,10 @@
     <div class="modal" id="history-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="history-modal-title">Verlauf</h3>
+                <h3 id="history-modal-title">Erfolg / Verlauf</h3>
                 <button class="btn-icon" onclick="closeHistoryModal()">✕</button>
             </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom: 6px;">Letzte 14 Tage Einnahme-Verlauf:</p>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom: 6px;">Einnahme der letzten 14 Tage:</p>
             <div class="history-grid" id="history-grid-container"></div>
             <div id="history-stats" style="font-size:12px; font-weight:600; color:var(--accent-green); text-align:center; margin-top: 8px;"></div>
             <div class="modal-buttons" style="margin-top: 14px;">
@@ -623,9 +653,11 @@
     <script>
         const pillIcon = `<svg class="type-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h-2zm0 6h2v2h-2z"/></svg>`;
         const dropIcon = `<svg class="type-icon" viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>`;
+        // Icon für den Verlauf Button
+        const historyIcon = `<svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>`;
 
         const defaultItems = [
-            { id: 'tirosint', name: 'Tirosint', tag: 'Täglich', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser', timeStr: '07:30', timerMins: 30, isTirosint: true, showRhythm: false, type: 'pill' },
+            { id: 'tirosint', name: 'Tirosint', tag: 'Täglich', tagClass: 'tag-blue', dose: '150', unit: 'µg', desc: 'Nüchtern mit Wasser (danach warten)', timeStr: '07:30', timerMins: 30, isTirosint: true, showRhythm: false, type: 'pill' },
             { id: 'vitd', name: 'Vitamin D3', tag: 'Alle 2 Tage', tagClass: 'tag-orange', dose: '5', unit: 'Tropfen', desc: 'Tropfen einnehmen', timeStr: '07:45', timerMins: 0, isTirosint: false, showRhythm: true, type: 'drop' },
             { id: 'magnesium', name: 'Magnesium', tag: 'Täglich', tagClass: 'tag-purple', dose: '1x', unit: 'Abends', desc: 'Vor dem Schlafen', timeStr: '19:00', timerMins: 0, isTirosint: false, showRhythm: false, type: 'pill' }
         ];
@@ -635,10 +667,11 @@
         let startDate = localStorage.getItem(startDateKey) || "2026-10-31";
 
         function updateKurInfo() {
+            const card = document.getElementById("kur-card");
             if (!startDate) {
-                document.querySelector('.card').style.display = 'none';
+                if(card) card.style.display = 'none';
             } else {
-                document.querySelector('.card').style.display = 'block';
+                if(card) card.style.display = 'block';
                 const start = new Date(startDate);
                 const today = new Date();
                 today.setHours(0,0,0,0);
@@ -711,7 +744,7 @@
                     
                     html += `
                         <div class="item-row">
-                            <div class="item-info" onclick="openHistoryModal('${item.id}', '${item.name}')" title="Klicken für Verlauf">
+                            <div class="item-info">
                                 <div class="item-title-line">
                                     <span class="item-name">${iconHtml} ${item.name}</span>
                                     ${tagHtml}
@@ -719,7 +752,11 @@
                                 <div class="item-desc">${item.desc} (${item.timeStr || '08:00'} Uhr)</div>
                             </div>
                             <div class="item-right">
-                                <div class="item-dose">${item.dose}<span>${item.unit}</span></div>
+                                <div class="item-dose" style="margin-right:2px;">${item.dose}<span>${item.unit}</span></div>
+                                <!-- NEU: Direkter Kalender-Button für den Erfolg! -->
+                                <button class="history-btn-frame" onclick="openHistoryModal('${item.id}', '${item.name}')" title="Verlauf & Erfolg anzeigen">
+                                    ${historyIcon}
+                                </button>
                                 <button class="edit-btn-frame" onclick="openEditItemModal('${item.id}')" title="Bearbeiten">
                                     <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                                 </button>
@@ -742,6 +779,25 @@
         }
 
         updateKurInfo();
+
+        // Audio-Signal für den Timer erzeugen (funktioniert im aktiven Tab)
+        function playBeep() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(800, ctx.currentTime);
+                gain.gain.setValueAtTime(0.5, ctx.currentTime);
+                osc.start();
+                gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 1.5);
+                osc.stop(ctx.currentTime + 1.5);
+            } catch(e) {
+                console.log("Audio nicht unterstützt");
+            }
+        }
 
         function handleCheck(id, timerMins, name) {
             const btn = document.getElementById("btn-" + id);
@@ -779,6 +835,7 @@
 
                 if (timeLeft <= 0) {
                     countdownEl.innerText = "00:00 - Zeit vorbei! 🎉";
+                    playBeep(); // Ton abspielen!
                     clearInterval(timerInterval);
                     localStorage.removeItem("global_timer_end");
                     localStorage.removeItem("global_timer_name");
@@ -796,7 +853,7 @@
             if (box) box.classList.remove("active");
         }
 
-        // Modal Einstellungen (Kur)
+        // Modal Einstellungen (Kur) & Lösch-Funktion für die Frau
         function openSettingsModal() {
             document.getElementById("start-date-input").value = startDate;
             document.getElementById("settings-modal").classList.add("open");
@@ -814,10 +871,11 @@
             closeSettingsModal();
         }
         function deleteKur() {
-            localStorage.removeItem(startDateKey);
-            startDate = null;
-            updateKurInfo();
-            closeSettingsModal();
+            if(confirm("Möchtest du diese 14-Tage-Kur Ansicht ausblenden? (Kann über das blaue Stift-Symbol oben rechts jederzeit wieder aktiviert werden)")) {
+                localStorage.removeItem(startDateKey);
+                startDate = null;
+                updateKurInfo();
+            }
         }
 
         // Modal Hinzufügen / Bearbeiten
@@ -925,7 +983,7 @@
 
         // Kalender / Historie Modal
         function openHistoryModal(itemId, itemName) {
-            document.getElementById("history-modal-title").innerText = `Verlauf: ${itemName}`;
+            document.getElementById("history-modal-title").innerText = `Erfolg: ${itemName}`;
             const gridContainer = document.getElementById("history-grid-container");
             gridContainer.innerHTML = "";
 
@@ -949,7 +1007,7 @@
                 `;
             }
 
-            document.getElementById("history-stats").innerText = `Eingenommen an ${takenCount} von 14 Tagen`;
+            document.getElementById("history-stats").innerText = `Eingenommen an ${takenCount} von 14 Tagen!`;
             document.getElementById("history-modal").classList.add("open");
         }
 
