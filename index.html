@@ -83,18 +83,13 @@
             margin-top: 2px;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 8px;
-        }
-
         .btn-icon {
             background: var(--badge-bg);
             border: 1px solid var(--card-border);
             color: var(--text-main);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,8 +102,8 @@
         }
 
         .btn-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
@@ -287,13 +282,13 @@
             fill: none;
         }
 
-        /* Timer Box (Aktiv nach Einnahme) */
+        /* Timer Box */
         .timer-box {
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 16px;
             padding: 14px;
-            margin-top: 12px;
+            margin-bottom: 12px;
             display: none;
             text-align: center;
         }
@@ -413,7 +408,7 @@
 <body>
 
     <div class="container">
-        <!-- Header -->
+        <!-- Header mit Zahnrad -->
         <div class="header">
             <div class="header-left">
                 <div class="app-icon">
@@ -424,12 +419,10 @@
                     <p id="current-date">Freitag, 30. Oktober 2026</p>
                 </div>
             </div>
-            <div class="header-actions">
-                <button class="btn-icon" onclick="openSettingsModal()" title="Einstellungen & Verwaltung">
-                    <!-- Zahnrad Symbol -->
-                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-                </button>
-            </div>
+            <button class="btn-icon" onclick="openSettingsModal()" title="Einstellungen">
+                <!-- Zahnrad Symbol -->
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            </button>
         </div>
 
         <!-- 14-Tage Wechselkur Card -->
@@ -514,7 +507,7 @@
         <div class="footer-note">Erinnerungen aktiv für Morgens & Abends</div>
     </div>
 
-    <!-- Modal für Einstellungen / Hinzufügen / Löschen -->
+    <!-- Modal für Einstellungen -->
     <div class="modal" id="settings-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -526,9 +519,9 @@
                 <input type="date" id="start-date-input" class="form-control">
             </div>
             <div class="form-group">
-                <label>Information / Hilfe</label>
+                <label>Information</label>
                 <p style="font-size:12px; color: var(--text-muted); line-height: 1.4;">
-                    Hier kannst du das Startdatum anpassen, falls sich der Rhythmus verschoben hat. Familienmitglieder können das Datum ebenfalls flexibel einstellen oder die Ansicht nutzen.
+                    Hier kannst du das Startdatum anpassen, falls sich der Rhythmus verschoben hat oder Familienmitglieder (z.B. Frau oder Vater) die App nutzen möchten.
                 </p>
             </div>
             <div class="modal-buttons">
@@ -543,14 +536,13 @@
         const startDateKey = "tirosint_start_date";
         let startDate = localStorage.getItem(startDateKey);
         if (!startDate) {
-            startDate = "2026-10-31"; // Startdatum standardmäßig
+            startDate = "2026-10-31";
             localStorage.setItem(startDateKey, startDate);
         }
 
         function updateKurInfo() {
             const start = new Date(startDate);
-            const today = new Dation = new Date();
-            // Nur Datum vergleichen
+            const today = new Date();
             today.setHours(0,0,0,0);
             start.setHours(0,0,0,0);
 
@@ -560,7 +552,6 @@
             let currentDayInCycle = (diffDays % 14) + 1;
             if (currentDayInCycle < 1) currentDayInCycle = 1;
 
-            // Tag 1, 3, 5... = 150 µg, Tag 2, 4, 6... = 137.5 µg
             const is150 = currentDayInCycle % 2 !== 0;
             const dose = is150 ? "150 µg" : "137,5 µg";
 
@@ -607,7 +598,6 @@
             localStorage.setItem(storagePrefix + "tirosint", isChecked);
 
             if (isChecked) {
-                // Start 30 min timer
                 const endTime = Date.now() + 30 * 60 * 1000;
                 localStorage.setItem(timerKey, endTime);
                 startTimer(endTime);
@@ -641,13 +631,12 @@
             document.getElementById("timer-box").classList.remove("active");
         }
 
-        // Timer bei Seitenaufruf wiederherstellen falls aktiv
         const savedEndTime = localStorage.getItem(timerKey);
         if (savedEndTime && savedEndTime > Date.now()) {
             startTimer(parseInt(savedEndTime));
         }
 
-        // Modal Funktionen
+        // Modal Funktionen für Einstellungen
         function openSettingsModal() {
             document.getElementById("start-date-input").value = startDate;
             document.getElementById("settings-modal").classList.add("open");
